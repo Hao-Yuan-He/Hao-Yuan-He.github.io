@@ -4,7 +4,7 @@ title: about
 permalink: /
 subtitle: 
   何浩源, Master Student.
-  Advised by <a href= https://ai.nju.edu.cn/lim>Prof. Ming Li.</a>
+  Advised by <a href= https://ai.nju.edu.cn/lim/index.htm>Prof. Ming Li.</a>
 
 profile:
   align: right
