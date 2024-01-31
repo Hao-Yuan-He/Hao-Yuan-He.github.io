@@ -1,39 +1,6 @@
 ---
 ---
 
-@article{xie2023weakly,
-  title       = {Weakly Supervised AUC Optimization: A Unified Partial AUC Approach},
-  abbr        = {Preprint},
-  bibtex_show = {true},
-  author      = {Zheng Xie and Yu Liu and Hao-Yuan He and Ming Li and Zhi-Hua Zhou},
-  year        = {2023},
-  abstract    = {Since acquiring perfect supervision is usually difficult, real-world machine learning tasks often confront inaccurate, incomplete, or inexact supervision, collectively referred to as weak supervision. In this work, we present WSAUC, a unified framework for weakly supervised AUC optimization problems, which covers noisy label learning, positive-unlabeled learning, multi-instance learning, and semi-supervised learning scenarios. Within the WSAUC framework, we first frame the AUC optimization problems in various weakly supervised scenarios as a common formulation of minimizing the AUC risk on contaminated sets, and demonstrate that the empirical risk minimization problems are consistent with the true AUC. Then, we introduce a new type of partial AUC, specifically, the reversed partial AUC (rpAUC), which serves as a robust training objective for AUC maximization in the presence of contaminated labels. WSAUC offers a universal solution for AUC optimization in various weakly supervised scenarios by maximizing the empirical rpAUC. Theoretical and experimental results under multiple settings support the effectiveness of WSAUC on a range of weakly supervised AUC optimization tasks.},
-  journal     = {Arxiv},
-  year        = {2022},
-  selected    = {false},
-  preview     = {wsauc.png},
-  pdf         = {https://arxiv.org/pdf/2305.14258}
-}
-
-@article{he2023RILL,
-  title       = {Reduced Implication-bias Logic Loss for Neuro-Symbolic Learning},
-  author      = {Hao-Yuan He and Wang-Zhou Dai and Ming Li},
-  journal     = {Machine Learning},
-  abbr        = {MLJ},
-  year        = {2023},
-  selected    = {true},
-  bibtex_show = {true},
-  abstract    = {Integrating logical reasoning and machine learning by approximating logical inference with differentiable operators is a widely used technique in the field of Neuro-Symbolic Learning.
-                 However, some differentiable operators could introduce significant biases during backpropagation, which can degrade the performance of Neuro-Symbolic systems.
-                 In this paper, we demonstrate that the loss functions derived from fuzzy logic operators commonly exhibit a bias, referred to as Implication Bias.
-                 To mitigate this bias, we propose a simple yet efficient method to transform the biased loss functions into Reduced Implication-bias Logic Loss (RILL).
-                 Empirical studies demonstrate that RILL outperforms the biased logic loss functions, especially when the knowledge base is incomplete or the supervised training data is insufficient.},
-  pdf         = {RILL.pdf},
-  slides      = {rill_oral.pptx},
-  poster      = {rill_poster.pdf},
-  preview={RILL_preview.png},
-}
-
 @article{he2023piLR,
   title       = {Probabilistic Instance Dependent Label Refinement for Noisy Label Learning},
   author      = {Hao-Yuan He and Yu Liu and Ren-Biao Liu and Zheng Xie and Ming Li},
@@ -43,13 +10,49 @@
   selected    = {true},
   bibtex_show = {true},
   abstract    = {Label refinement methods are designed to improve the quality of training labels by incorporating model predictions into the original training labels.
-    By adjusting the combination coefficient of the noisy label, the impact of noise is reduced, which in turn makes the training process more robust.
-    However, previous label refinement methods are unable to model instance-dependent noise, which is the most realistic type of noise.
-    To address this limitation, we propose a simple approach, probabilistic instance-dependent label refinement (denoted as $\pi$-LR).
-    Inspired by the fact that humans are more likely to make mistakes when annotating confusing instances, we propose to estimate the probability of whether a sample is confusing, which can be beneficial for modeling noise generation.
-    Our approach utilizes this concept by assigning a confusing probability $\eta_i$ to each instance $\boldsymbol{x}_i$ from a probabilistic perspective.
-    This provides a clear understanding of how instance-dependent noise affects true labels.
-    Empirical evaluations show that $\pi$-LR enhances the robustness of the model in the presence of label noise and outperforms all compared methods on both realistic and synthetic label noise datasets.},
+                 By adjusting the combination coefficient of the noisy label, the impact of noise is reduced, which in turn makes the training process more robust.
+                 However, previous label refinement methods are unable to model instance-dependent noise, which is the most realistic type of noise.
+                 To address this limitation, we propose a simple approach, probabilistic instance-dependent label refinement (denoted as $\pi$-LR).
+                 Inspired by the fact that humans are more likely to make mistakes when annotating confusing instances, we propose to estimate the probability of whether a sample is confusing, which can be beneficial for modeling noise generation.
+                 Our approach utilizes this concept by assigning a confusing probability $\eta_i$ to each instance $\boldsymbol{x}_i$ from a probabilistic perspective.
+                 This provides a clear understanding of how instance-dependent noise affects true labels.
+                 Empirical evaluations show that $\pi$-LR enhances the robustness of the model in the presence of label noise and outperforms all compared methods on both realistic and synthetic label noise datasets.},
   pdf         = {piLR.pdf},
-  preview={piLR_preview.png},
+  preview     = {piLR_preview.png}
+}
+
+@article{he2024RILL,
+  title       = {Reduced Implication-bias Logic Loss for Neuro-Symbolic Learning},
+  author      = {Hao-Yuan He and Wang-Zhou Dai and Ming Li},
+  journal     = {Machine Learning},
+  abbr        = {MLJ},
+  year        = {2024},
+  selected    = {true},
+  bibtex_show = {true},
+  abstract    = {Integrating logical reasoning and machine learning by approximating logical inference with differentiable operators is a widely used technique in the field of Neuro-Symbolic Learning.
+                 However, some differentiable operators could introduce significant biases during backpropagation, which can degrade the performance of Neuro-Symbolic systems.
+                 In this paper, we demonstrate that the loss functions derived from fuzzy logic operators commonly exhibit a bias, referred to as Implication Bias.
+                 To mitigate this bias, we propose a simple yet efficient method to transform the biased loss functions into Reduced Implication-bias Logic Loss (RILL).
+                 Empirical studies demonstrate that RILL outperforms the biased logic loss functions, especially when the knowledge base is incomplete or the supervised training data is insufficient.},
+  pages       = {1--21},
+  publisher   = {Springer},
+  doi         = {10.1007/s10994-023-06436-4},
+  pdf         = {RILL.pdf},
+  slides      = {rill_oral.pptx},
+  poster      = {rill_poster.pdf},
+  preview     = {RILL_preview.png}
+}
+
+@article{xie2024weakly,
+  title       = {Weakly Supervised AUC Optimization: A Unified Partial AUC Approach},
+  abbr        = {TPAMI},
+  bibtex_show = {true},
+  author      = {Zheng Xie and Yu Liu and Hao-Yuan He and Ming Li and Zhi-Hua Zhou},
+  year        = {2024},
+  abstract    = {Since acquiring perfect supervision is usually difficult, real-world machine learning tasks often confront inaccurate, incomplete, or inexact supervision, collectively referred to as weak supervision. In this work, we present WSAUC, a unified framework for weakly supervised AUC optimization problems, which covers noisy label learning, positive-unlabeled learning, multi-instance learning, and semi-supervised learning scenarios. Within the WSAUC framework, we first frame the AUC optimization problems in various weakly supervised scenarios as a common formulation of minimizing the AUC risk on contaminated sets, and demonstrate that the empirical risk minimization problems are consistent with the true AUC. Then, we introduce a new type of partial AUC, specifically, the reversed partial AUC (rpAUC), which serves as a robust training objective for AUC maximization in the presence of contaminated labels. WSAUC offers a universal solution for AUC optimization in various weakly supervised scenarios by maximizing the empirical rpAUC. Theoretical and experimental results under multiple settings support the effectiveness of WSAUC on a range of weakly supervised AUC optimization tasks.},
+  journal     = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year        = {2024},
+  selected    = {false},
+  preview     = {wsauc.png},
+  pdf         = {https://ieeexplore.ieee.org/document/10413526}
 }
