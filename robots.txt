@@ -1,4 +1,5 @@
 User-agent: *
-Disallow:
+Disallow: /assets/*
+Disallow: /publications/*
 
 Sitemap: https://Hao-Yuan-He.github.io/sitemap.xml
