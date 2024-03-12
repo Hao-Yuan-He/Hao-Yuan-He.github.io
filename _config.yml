@@ -2,7 +2,7 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title: HaoYuan He # the website title (if blank, full name will be used instead)
+title: Hao-Yuan He # the website title (if blank, full name will be used instead)
 first_name: Hao-Yuan
 middle_name: 
 last_name: He
@@ -411,6 +411,9 @@ medium_zoom:
 jekyll_get_json:
   - data: resume
     json: assets/json/resume.json # it can also be an url
+  - data: about
+    json: assets/json/about.json
+  
 jsonresume:
   - basics
   - work
