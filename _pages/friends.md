@@ -9,7 +9,7 @@ horizontal: true
 ---
 
 Here I list some of my friends' homepage:
-- [Chun-Hui Li, 李春辉](https://chunhui99.github.io): 
+- [Chun-Hui Li, 李春晖](https://chunhui99.github.io): 
   - Ph.D candidate of HKUST. 
-  - Expert in NLP & LLMs & GFlowNet.
+  - Researcher in NLP & LLMs & GFlowNet.
   - My roommate at NJU during 2021-2024.
