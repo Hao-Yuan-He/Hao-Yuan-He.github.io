@@ -62,7 +62,7 @@ layout: default
     <div class="cv" style="color: inherit;">
       <!-- Selected papers -->
       {% if page.selected_papers -%}
-      <h3 class="card-title"><a
+      <h3><a
           href="{{ '/publications/' | relative_url }}"
           style="color: inherit;">Selected Publications</a></h3>
       <div>
@@ -84,7 +84,7 @@ layout: default
               style="font-size: 0.95rem;">
               Knowledge and Information Systems</a></li></ul>
       </div>
-
+      <br>
       <!-- Awards -->
       {% for data in site.data.about %}
       {% if site.jsonresume and site.jsonresume.size > 0 %}
@@ -106,7 +106,7 @@ layout: default
         {% when "education" %}
         {% include resume/education.html %}
         {% when "work" %}
-        {% include resume/work.html %}
+        {% include resume/bwork.html %}
         {% when "volunteer" %}
         {% include resume/volunteer.html %}
         {% when "projects" %}

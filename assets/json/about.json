@@ -25,6 +25,17 @@
             "summary": ""
         }
     ],
+    "work": [
+        {
+          "name": "Research Intern",
+          "position": "Tencent",
+          "url": "",
+          "startDate": "2023-05",
+          "endDate": "2023-07",
+          "summary": "I was working on the game AI of King of Honor(王者荣耀). Specifically, I was working on how to make the agent have diverse abilities and play like a human.",
+          "highlights": []
+        }
+      ],
     "certificates": [],
     "publications": [],
     "skills": [],
