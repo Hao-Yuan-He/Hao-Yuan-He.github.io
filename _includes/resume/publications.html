@@ -2,7 +2,7 @@
     {% assign publications = data[1] | sort: 'releaseDate' | reverse %}
     {% for content in publications %}
     <li class="list-group-item">
-      <div class="row">
+      <div class="row" style="width: 150%;">
         <div class="col-xs-2 cl-sm-2 col-md-2 text-center" style="width: 75px;">
             {% if content.releaseDate %}
             {% assign date = content.releaseDate | split: "-" | join: "." %}
