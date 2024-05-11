@@ -1034,3 +1034,15 @@ nav[data-toggle="toc"] {
     padding-top: 0.5rem;
   }
 }
+
+
+.preview-container {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: 0px; /* 调整徽章在垂直方向上的位置 */
+  left: 12px; /* 调整徽章在水平方向上的位置 */
+  // z-index: 1; /* 确保徽章位于图片上方 */
+}
