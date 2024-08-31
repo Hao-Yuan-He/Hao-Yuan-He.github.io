@@ -2,7 +2,7 @@
 ---
 <!-- _layouts/bib.html -->
 <div class="row">
-  <div class="col-md-3 {% if entry.preview %}preview{% else %}abbr{% endif %}">
+  <div class="col-md-1 abbr">
     {%- if entry.abbr -%}
     {%- if site.data.venues[entry.abbr] -%}
     {%- assign venue_style = nil -%}
@@ -16,27 +16,10 @@
     <abbr class="badge">{{entry.abbr}}</abbr>
     {%- endif -%}
     {%- endif -%}
-    {%- if entry.preview -%}
-    {% if entry.preview contains '://' -%}
-    <img data-zoomable class="preview z-depth-1 rounded"
-      src="{{ entry.preview }}">
-    {%- else -%}
-    {%- assign entry_path = entry.preview | prepend:
-    '/assets/img/publication_preview/' -%}
-    {% include figure.html
-    path=entry_path
-    class="preview z-depth-1 rounded"
-    zoomable=true
-    alt=entry.preview -%}
-    {%- endif -%}
-    {%- endif -%}
-    <!-- {%- if entry.cat -%}
-    <a style="color: gray; font-size: 0.8rem;">{{entry.cat}}</a>
-    {%- endif -%} -->
   </div>
 
   <!-- Entry bib key -->
-  <div id="{{entry.key}}" class="col-md-7">
+  <div id="{{entry.key}}" class="col-md-9">
     <!-- Title -->
     <div class="title">{{entry.title}}</div>
     <!-- Author -->
