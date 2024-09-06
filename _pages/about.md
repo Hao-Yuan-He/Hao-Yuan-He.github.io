@@ -12,7 +12,7 @@ profile:
   image: prof_pic.png
   image_circular: true # crops the image to make it circular
   address:
-    <a style="font-size:0.9rem;">Qingdao, Shandong, 2022</a>
+    <a style="font-size:0.9rem;">Qingdao, Shandong, 2021</a>
 
 news: true  # includes a list of news items
 latest_posts: false  # includes a list of the newest posts
