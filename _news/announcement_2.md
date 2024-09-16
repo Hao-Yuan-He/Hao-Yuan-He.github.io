@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-One paper is accepted and online by *Machine Learning* :sparkles: :smile:
+One paper is accepted by *Machine Learning* :sparkles: :smile:
