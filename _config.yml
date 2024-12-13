@@ -276,7 +276,7 @@ scholar:
   last_name: [He]
   first_name: [Hao-Yuan]
 
-  style: apa
+  style: ieee
   locale: en
 
   source: /_bibliography/

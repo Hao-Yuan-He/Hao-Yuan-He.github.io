@@ -7,3 +7,5 @@ services:
       - 8080:8080
     volumes:
       - .:/srv/jekyll
+      - ./entrypoint.sh:/entrypoint.sh
+    entrypoint: ["/entrypoint.sh"]
