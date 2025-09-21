@@ -130,8 +130,8 @@
       {{ periodical | strip | }}
       {%- if entry.award -%}
       <!-- 这里加个空格 -->
-      &nbsp;&nbsp;
-    <a style="color: #00369f; font-size: 1rem;">{{entry.award}}</a>
+      &nbsp;
+    <a style="color: var(--global-award-color); font-size: .9rem;">{{entry.award}}</a>
     {%- endif -%}
     </div>
     <div class="periodical">
