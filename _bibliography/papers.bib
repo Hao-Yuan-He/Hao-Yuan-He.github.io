@@ -1,5 +1,23 @@
 ---
 ---
+
+@inproceedings{he2025AnalysisOnNeSy,
+  abbr        = {NeurIPS},
+  abstract    = {This paper presents a comprehensive theoretical analysis of the learnability of neuro-symbolic (NeSy) tasks within hybrid systems. 
+                 We characterize the learnability of NeSy tasks by their derived constraint satisfaction problems (DCSPs), demonstrating that a task is learnable if and only if its corresponding DCSP admits a unique solution. 
+                 Under mild assumptions, we establish the sample complexity for learnable tasks and show that, for general tasks, the asymptotic expected concept error is controlled by the degree of disagreement among DCSP solutions. 
+                 Our findings unify the characterization of learnability and the phenomenon of reasoning shortcuts, providing theoretical guarantees and actionable guidance for the principled design of NeSy systems.},
+  author      = {Hao-Yuan He and Ming Li},
+  bibtex_show = {false},
+  booktitle   = {Advances in Neural Information Processing Systems 38},
+  pdf         = {AnalysisOnNeSy_arxiv.pdf},
+  selected    = {true},
+  title       = {A Learnability Analysis on Neuro-Symbolic Learning},
+  year        = {2025},
+  award       = {Spotlight}
+}
+
+
 @inproceedings{he2024a3bl,
   abbr        = {ICML},
   abstract    = {Abductive Learning (ABL) is a promising framework for integrating sub-symbolic perception and logical reasoning through abduction. In this case, the abduction process provides supervision for the perception model from the background knowledge. Nevertheless, this process naturally contains uncertainty, since the knowledge base may be satisfied by numerous potential candidates. This implies that the result of the abduction process, i.e., a set of candidates, is ambiguous; both correct and incorrect candidates are mixed in this set. The prior art of abductive learning selects the candidate that has the minimal inconsistency of the knowledge base. However, this method overlooks the ambiguity in the abduction process and is prone to error when it fails to identify the correct candidates. To address this, we propose Ambiguity-Aware Abductive Learning (A3BL), which evaluates all potential candidates and their probabilities, thus preventing the model from falling into sub-optimal solutions. Both experimental results and theoretical analyses prove that A3BL markedly enhances ABL by efficiently exploiting the ambiguous abduced supervision.},
@@ -86,25 +104,5 @@
   selected    = {true},
   title       = {Weakly Supervised AUC Optimization: A Unified Partial AUC Approach},
   volume      = {46},
-  year        = {2024},
-}
-
-
-
-@inproceedings{he2025AnalysisOnNeSy,
-  abbr        = {NeurIPS},
-  abstract    = {This paper analyzes the learnability of neuro-symbolic (NeSy) tasks within hybrid systems. 
-                 We show that the learnability of NeSy tasks can be characterized by their derived constraint satisfaction problems (DCSPs). 
-                 Specifically, a task is learnable if the corresponding DCSP has a unique solution; otherwise, it is unlearnable. 
-                 For learnable tasks, we establish error bounds by exploiting the clustering property of the hypothesis space. 
-                 Additionally, we analyze the asymptotic error for general NeSy tasks, showing that the expected error scales with the disagreement among solutions. 
-                 Our results offer a principled approach to determining learnability and provide insights into the design of new algorithms.},
-  author      = {Hao-Yuan He and Ming Li},
-  bibtex_show = {false},
-  booktitle   = {Advances in Neural Information Processing Systems 38},
-  pdf         = {AnalysisOnNeSy_arxiv.pdf},
-  selected    = {true},
-  title       = {A Learnability Analysis on Neuro-Symbolic Learning},
-  year        = {2025},
-  award       = {Spotlight}
+  year        = {2024}
 }
