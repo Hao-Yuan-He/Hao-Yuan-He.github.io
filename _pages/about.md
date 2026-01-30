@@ -24,7 +24,5 @@ I am a second-year Ph.D. student at the [School of Artificial Intelligence, Nanj
 I am always happy to potential collaborations or discussions.
 Please feel free to contact me if you are interested.
 
-
-**Research Interests**. Currently, my research interests lie in the field of machine learning, with a particular focus on:
-- Weakly supervised learning: Learning under incomplete, inexact, or incorrect supervision.
+**Research Interests**. Currently, my research interests lie in the field of artificial intelligence, with a particular focus on:
 - Abductive learning: Integrating machine learning with logical reasoning.
