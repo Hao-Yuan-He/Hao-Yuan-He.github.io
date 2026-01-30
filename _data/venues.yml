@@ -5,6 +5,9 @@
 "PhysRev":
   url: https://journals.aps.org/
 
+"Manuscript":
+  color: "#00369f"
+
 "Preprint":
   color: "#00369f"
 
