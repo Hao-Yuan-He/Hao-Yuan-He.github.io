@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hao-Yuan He | Personal Page</title>
+    <meta name="description" content="Minimal personal website powered by plain HTML, CSS, and JavaScript." />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-93742XCGMS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-93742XCGMS");
+    </script>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body data-publications="selected">
+    <header class="site-header">
+      <div class="container nav-row">
+        <a href="#top" class="brand">Hao-Yuan He</a>
+        <nav aria-label="Main navigation">
+          <ul class="nav-links">
+            <li><a href="short-bio.html">Short Bio</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#awards">Awards</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="full-publications.html">Full Publications</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="section hero">
+        <div class="container hero-grid">
+          <div class="intro-heading">
+            <!-- <p class="eyebrow">Machine Learning</p> -->
+            <h3>Hao-Yuan He (何浩源) </h3>
+            <p class="hero-meta">Nanjing University · LAMDA Group</p>
+          </div>
+          <div class="intro-main">
+            <p class="lead">
+              I am a second-year Ph.D. student at the
+              <a href="https://ai.nju.edu.cn/">School of Artificial Intelligence, Nanjing University</a>, in the
+              <a href="https://www.lamda.nju.edu.cn">LAMDA Group lead by Professor Zhi-Hua Zhou.</a>
+            </p>
+            
+            <p class="lead intro-interests">
+              I am working on bridging machine learning and logical reasoning within a unified iterative loop. 
+              In particular, my research focuses on abductive learning (ABL), including its theoretical foundations
+              <a class="ref-tag" href="full-publications.html#pub-he2025analysisonnesy">C1</a>,
+              algorithmic design
+              <a class="ref-tag" href="full-publications.html#pub-he2024a3bl">C2</a>,
+              and practical applications.
+            </p>
+          </div>
+          <figure class="profile">
+            <img src="assets/img/profile.png" alt="Portrait of Hao-Yuan He" />
+            <figcaption class="profile-caption">Qingdao | Summer 2022</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="publications" class="section">
+        <div class="container">
+          <div class="section-head">
+            <h2>Selected Publications</h2>
+            <a class="inline-link" href="full-publications.html">View full list</a>
+          </div>
+          <div id="pub-status" class="muted">Loading publications...</div>
+          <div id="pub-list" class="pub-list" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section id="awards" class="section">
+        <div class="container">
+          <h2>Awards</h2>
+          <ul class="award-list">
+            <li class="award-item">
+              <div class="award-title">Winner Award</div>
+              <div class="award-meta">International Algorithm Case Competition (Data Selection and Label Correction) · 2022</div>
+            </li>
+            <li class="award-item">
+              <div class="award-title">First Prize of Academic Scholarship</div>
+              <div class="award-meta">Nanjing University · 2022, 2023</div>
+            </li>
+            <li class="award-item">
+              <div class="award-title">First Prize of Chinese Mathematics Competitions</div>
+              <div class="award-meta">Chinese Mathematical Society · 2018, 2020</div>
+            </li>
+            <li class="award-item">
+              <div class="award-title">National Encouragement Scholarship</div>
+              <div class="award-meta">Jiangsu Education Department · 2019</div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="services" class="section">
+        <div class="container">
+          <h2>Services</h2>
+          <ul class="plain-list">
+            <li><strong>Volunteer:</strong> <a href="https://www.lamda.nju.edu.cn/conf/mla23/">MLA'23</a>; <a href="https://www.lamda.nju.edu.cn/ijclr24/index.html">IJCLR'24</a></li>
+            <li><strong>Conference Reviewer:</strong> <a href="https://www.acml-conf.org/2023">ACML (2023, 2025)</a>; <a href="https://www.lamda.nju.edu.cn/ijclr24/index.html">IJCLR (2024, 2025)</a>; <a href="https://iclr.cc/Conferences">ICLR (2025, 2026)</a>; <a href="https://icml.cc/Conferences">ICML (2025)</a>; <a href="https://neurips.cc/Conferences">NeurIPS (2025)</a>; <a href="https://aaai.org/conference/aaai/aaai-26/">AAAI (2026)</a></li>
+            <li><strong>Journal Reviewer:</strong> <a href="https://link.springer.com/journal/10115">Knowledge and Information Systems</a></li>
+            <li><strong>Teaching Assistant:</strong> Discrete Mathematics (2021 Fall); Introduction of Artificial Intelligence (2021 Fall); Advanced Algebra (2022 Fall); Deep Learning Platform Techniques (2022 Fall); Complex Object Data Mining (2023 Fall); Introduction about Frontiers of Artificial Intelligence (2024 Fall)</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <small>© <span id="year"></span> Hao-Yuan He</small>
+        <div class="footer-contact">
+          <a href="mailto:hehy@lamda.nju.edu.cn">Email</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://github.com/Hao-Yuan-He">GitHub</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
