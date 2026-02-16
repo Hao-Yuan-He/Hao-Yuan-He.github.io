@@ -18,10 +18,6 @@ python3 -m http.server 8080
 
 Open `http://localhost:8080`.
 
-## Legacy Jekyll Backup
+## Notes
 
-The previous Jekyll-based site was fully archived and preserved in:
-
-- `legacy-jekyll/`
-
-This keeps all old content and templates available if you want to rebuild or migrate parts later.
+The old Jekyll version has been removed to keep this repository focused on the lightweight static site in `lite-site/`.
