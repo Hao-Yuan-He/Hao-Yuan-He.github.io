@@ -480,6 +480,24 @@ function updateIntroRefTags(tagMap) {
   });
 }
 
+function initResearchToggle() {
+  const panel = document.querySelector(".research-panel");
+  if (!panel) return;
+
+  const btn = panel.querySelector("[data-action='toggle-research-detail']");
+  const detail = panel.querySelector(".research-detail");
+  const label = btn ? btn.querySelector(".research-expand-label") : null;
+  if (!(btn instanceof HTMLButtonElement) || !(detail instanceof HTMLElement)) return;
+
+  btn.addEventListener("click", () => {
+    const willOpen = detail.hidden;
+    detail.hidden = !willOpen;
+    btn.setAttribute("aria-expanded", String(willOpen));
+    btn.classList.toggle("is-open", willOpen);
+    if (label) label.textContent = willOpen ? "Hide details" : "Show more";
+  });
+}
+
 if (pubListEl) {
 pubListEl.addEventListener("click", (event) => {
   const target = event.target;
@@ -599,3 +617,4 @@ async function initNews() {
 
 initPublications();
 initNews();
+initResearchToggle();
