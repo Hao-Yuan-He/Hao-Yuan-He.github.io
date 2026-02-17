@@ -132,6 +132,43 @@ h2 {
   color: #4f5c6f;
 }
 
+/* CV intro part */
+.cv-intro {
+  margin-top: 0.85rem;
+  color: #445469;
+}
+
+.cv-contact {
+  color: #2b4f8c;
+  font-weight: 600;
+}
+
+.cv-brief-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.34rem;
+  margin-left: 0.24rem;
+  color: #2b4f8c;
+  font-weight: 600;
+}
+
+.cv-brief-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1px solid #c2d4f4;
+  border-radius: 5px;
+  background: #eef4ff;
+  color: #1d4f98;
+}
+
+.cv-brief-icon i {
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
 .ref-chip {
   display: inline-flex;
   align-items: center;
