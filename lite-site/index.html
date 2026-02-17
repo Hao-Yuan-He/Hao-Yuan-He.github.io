@@ -31,6 +31,7 @@
         <nav aria-label="Main navigation">
           <ul class="nav-links">
             <li><a href="short-bio.html">About</a></li>
+            <li><a href="#research">Research</a></li>
             <li><a href="news.html">News</a></li>
             <li><a href="full-publications.html">Publications</a></li>
           </ul>
@@ -50,17 +51,9 @@
             <p class="lead">
               I am a second-year Ph.D. student at the
               <a href="https://ai.nju.edu.cn/">School of Artificial Intelligence, Nanjing University</a>, supervised by Professor Ming Li, in the
-              <a href="https://www.lamda.nju.edu.cn">LAMDA Group</a> which is lead by Professor Zhi-Hua Zhou.
+              <a href="https://www.lamda.nju.edu.cn">LAMDA Group</a>, which is led by Professor Zhi-Hua Zhou.
             </p>
             
-            <p class="lead intro-interests">
-              I am working on bridging machine learning and logical reasoning within a unified iterative loop.
-              In particular, my research focuses on abductive learning (ABL), including its theoretical foundations
-              <a class="ref-tag" data-ref-key="he2025AnalysisOnNeSy" href="full-publications.html#pub-he2025analysisonnesy">C?</a>,
-              algorithmic design
-              <a class="ref-tag" data-ref-key="he2024a3bl" href="full-publications.html#pub-he2024a3bl">C?</a>,
-              and practical applications.
-            </p>
             <p class="lead cv-intro">
               If you are interested in my work, please feel free to
               <a class="cv-contact" href="mailto:hehy@lamda.nju.edu.cn">drop me an email</a>.
@@ -76,6 +69,60 @@
           </figure>
         </div>
       </section>
+
+      <section id="research" class="section">
+        <div class="container">
+          <div class="section-head">
+            <h2>Research Big Picture</h2>
+          </div>
+
+          <div class="research-panel">
+            <p class="research-lay">
+              <span class="lay-label">Lay summary.</span> We build AI systems that learn from data and use logic, so they can make more reliable
+              decisions.
+            </p>
+            <p class="research-context">
+              Simply turning logic into continuous formulas can break learning in subtle ways
+              <a class="ref-tag" data-ref-key="he2024RILL" href="full-publications.html#pub-he2024rill">J?</a>.
+              Instead, we need hybrid systems that carefully balance learning and reasoning.
+              We focus on three practical questions:
+            </p>
+
+            <ol class="research-questions">
+              <li>
+                <h3>When can hybrid systems actually learn?</h3>
+                <p>
+                  Hybrid systems like abductive learning preserve the full capacity of learning and reasoning.
+                  We establish a PAC learnability condition for such systems.
+                  <a class="ref-tag" data-ref-key="he2025AnalysisOnNeSy" href="full-publications.html#pub-he2025analysisonnesy">C?</a>.
+                </p>
+              </li>
+              <li>
+                <h3>How do we handle ambiguity?</h3>
+                <p>
+                  Symbolic system feedback is often non-unique and ambiguous. We design methods that explicitly account for multiple plausible explanations and
+                  learn from them efficiently
+                  <a class="ref-tag" data-ref-key="he2024a3bl" href="full-publications.html#pub-he2024a3bl">C?</a>.
+                </p>
+              </li>
+              <li>
+                <h3>How do we speed up reasoning?</h3>
+                <p>
+                  Logical reasoning problems are generally NP-hard and cannot always be solved quickly.
+                  We use learning-guided methods for fast, reliable approximation
+                  <a class="ref-tag" data-ref-key="he2026learning" href="full-publications.html#pub-he2026learning">P?</a>.
+                </p>
+              </li>
+            </ol>
+
+            <p class="research-note">
+              Our goal is to combine theory, algorithms, and computation to build robust hybrid AI systems for real-world use.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
 
       <section id="news" class="section">
         <div class="container">
