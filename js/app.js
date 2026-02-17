@@ -3,6 +3,7 @@ const pubStatusEl = document.getElementById("pub-status");
 const newsListEl = document.getElementById("news-list");
 const publicationMode = document.body.dataset.publications || "selected";
 const yearEl = document.getElementById("year");
+const NEWS_DATA_PATH = "data/news.json";
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 let publications = [];
@@ -548,14 +549,39 @@ async function initPublications() {
 
 async function initNews() {
   if (!newsListEl) return;
+  const resolvedUrl = new URL(NEWS_DATA_PATH, window.location.href).href;
+  console.info(`[news] Fetching ${NEWS_DATA_PATH} -> ${resolvedUrl}`);
   try {
-    const res = await fetch("data/news.json");
+    const res = await fetch(NEWS_DATA_PATH, { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const payload = await res.json();
-    const items = Array.isArray(payload.news) ? payload.news : [];
+    if (!payload || !Array.isArray(payload.news)) {
+      throw new Error("Invalid news payload: expected { news: [] }");
+    }
+    const items = payload.news.filter((item) => {
+      return item && typeof item.date === "string" && typeof item.content === "string";
+    });
+    if (items.length !== payload.news.length) {
+      console.warn(`[news] Skipped ${payload.news.length - items.length} invalid item(s).`);
+    }
     renderNews(items);
+    if (!items.length) {
+      newsListEl.innerHTML = "<li>No news items found.</li>";
+    }
   } catch (err) {
+    const isFileProtocol = window.location.protocol === "file:";
+    console.error("[news] Failed to load news.", {
+      path: NEWS_DATA_PATH,
+      resolvedUrl,
+      protocol: window.location.protocol,
+      error: err,
+    });
     newsListEl.innerHTML = "";
+    const li = document.createElement("li");
+    li.textContent = isFileProtocol
+      ? "Failed to load news.json via file://. Please run with a local HTTP server."
+      : `Failed to load news: ${err.message}`;
+    newsListEl.appendChild(li);
   }
 }
 
