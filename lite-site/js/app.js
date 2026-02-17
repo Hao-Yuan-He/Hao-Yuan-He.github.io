@@ -289,34 +289,20 @@ function createPublicationNode(entry, tagMap) {
   node.className = "pub-item";
   node.id = pubAnchorId(entry.key);
 
-  const badgeRow = document.createElement("div");
-  badgeRow.className = "badge-row";
-
+  const metaRow = document.createElement("div");
+  metaRow.className = "badge-row";
   if (entry.abbr) {
     const venueBadge = document.createElement("span");
     venueBadge.className = "badge venue";
-    venueBadge.textContent = entry.abbr;
-    badgeRow.appendChild(venueBadge);
+    venueBadge.textContent = normalizeSpace(entry.abbr);
+    metaRow.appendChild(venueBadge);
   }
-
-  const refBadge = document.createElement("span");
-  refBadge.className = "badge ref";
-  refBadge.textContent = tagMap[entry.key] || "O?";
-  badgeRow.appendChild(refBadge);
-
-  const titleEl = document.createElement("h3");
-  titleEl.className = "pub-title";
-  titleEl.textContent = normalizeSpace(entry.title || "(untitled)");
-
-  const authorLineEl = document.createElement("div");
-  authorLineEl.className = "pub-line pub-authors";
-  const authorLine = formatAuthorLine(parseAuthors(entry.author || ""));
-  authorLineEl.textContent = authorLine;
-
-  const venueLineEl = document.createElement("div");
-  venueLineEl.className = "pub-line pub-venue";
-  const venueLine = formatVenueDetail(entry);
-  venueLineEl.textContent = venueLine;
+  if (entry.award) {
+    const awardBadge = document.createElement("span");
+    awardBadge.className = "badge award";
+    awardBadge.textContent = normalizeSpace(entry.award);
+    metaRow.appendChild(awardBadge);
+  }
 
   const actionRow = document.createElement("div");
   actionRow.className = "pub-actions";
@@ -339,6 +325,34 @@ function createPublicationNode(entry, tagMap) {
       actionRow.appendChild(a);
     }
   });
+
+  const headRow = document.createElement("div");
+  headRow.className = "pub-head";
+  if (metaRow.childNodes.length) headRow.appendChild(metaRow);
+  if (actionRow.childNodes.length) headRow.appendChild(actionRow);
+
+  const titleEl = document.createElement("h3");
+  titleEl.className = "pub-title";
+
+  const refPrefix = document.createElement("a");
+  refPrefix.className = "ref-chip pub-ref-prefix";
+  refPrefix.href = `#${node.id}`;
+  refPrefix.textContent = tagMap[entry.key] || "O?";
+  refPrefix.setAttribute("aria-label", `Reference tag ${refPrefix.textContent}`);
+  titleEl.appendChild(refPrefix);
+
+  const titleText = document.createTextNode(normalizeSpace(entry.title || "(untitled)"));
+  titleEl.appendChild(titleText);
+
+  const authorLineEl = document.createElement("div");
+  authorLineEl.className = "pub-line pub-authors";
+  const authorLine = formatAuthorLine(parseAuthors(entry.author || ""));
+  authorLineEl.textContent = authorLine;
+
+  const venueLineEl = document.createElement("div");
+  venueLineEl.className = "pub-line pub-venue";
+  const venueLine = formatVenueDetail(entry);
+  venueLineEl.textContent = venueLine;
 
   const detail = document.createElement("div");
   detail.className = "pub-detail";
@@ -378,11 +392,10 @@ function createPublicationNode(entry, tagMap) {
   bibWrap.appendChild(bibPanel);
   detail.appendChild(bibWrap);
 
-  if (badgeRow.childNodes.length) node.appendChild(badgeRow);
+  if (headRow.childNodes.length) node.appendChild(headRow);
   node.appendChild(titleEl);
   node.appendChild(authorLineEl);
   node.appendChild(venueLineEl);
-  node.appendChild(actionRow);
   node.appendChild(detail);
   return node;
 }
@@ -390,6 +403,7 @@ function createPublicationNode(entry, tagMap) {
 function renderPublications() {
   pubListEl.innerHTML = "";
   const tagMap = buildTagMap(publications);
+  updateIntroRefTags(tagMap);
   const visible = sortEntries(publications).filter((entry) => {
     return publicationMode === "all" ? true : isSelected(entry);
   });
@@ -427,6 +441,17 @@ function renderPublications() {
 
   pubStatusEl.textContent = `${visible.length} shown / ${publications.length} total publication(s).`;
   scrollToHashIfPresent();
+}
+
+function updateIntroRefTags(tagMap) {
+  const refs = document.querySelectorAll("[data-ref-key]");
+  refs.forEach((el) => {
+    const key = el.getAttribute("data-ref-key") || "";
+    if (!key) return;
+    const tag = tagMap[key] || "O?";
+    el.textContent = tag;
+    el.setAttribute("href", `full-publications.html#${pubAnchorId(key)}`);
+  });
 }
 
 pubListEl.addEventListener("click", (event) => {
