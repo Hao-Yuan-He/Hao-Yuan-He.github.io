@@ -331,6 +331,7 @@ function createPublicationNode(entry, tagMap) {
 
   const actionRow = document.createElement("div");
   actionRow.className = "pub-actions";
+  if (publicationMode === "all") actionRow.classList.add("open");
 
   buildActionItems(entry).forEach((item) => {
     if (item.kind === "button") {
@@ -354,7 +355,6 @@ function createPublicationNode(entry, tagMap) {
   const headRow = document.createElement("div");
   headRow.className = "pub-head";
   if (metaRow.childNodes.length) headRow.appendChild(metaRow);
-  if (actionRow.childNodes.length) headRow.appendChild(actionRow);
 
   const titleEl = document.createElement("h3");
   titleEl.className = "pub-title";
@@ -421,6 +421,7 @@ function createPublicationNode(entry, tagMap) {
   node.appendChild(titleEl);
   node.appendChild(authorLineEl);
   node.appendChild(venueLineEl);
+  if (actionRow.childNodes.length) node.appendChild(actionRow);
   node.appendChild(detail);
   return node;
 }
@@ -480,10 +481,21 @@ function updateIntroRefTags(tagMap) {
 }
 
 if (pubListEl) {
-  pubListEl.addEventListener("click", (event) => {
-    const target = event.target;
-    if (!(target instanceof HTMLElement)) return;
-    if (!target.classList.contains("pub-btn")) return;
+pubListEl.addEventListener("click", (event) => {
+  const target = event.target;
+  if (!(target instanceof HTMLElement)) return;
+  if (target.closest(".pub-btn, a, .pub-detail")) return;
+
+  const item = target.closest(".pub-item");
+  if (!item) return;
+  const actions = item.querySelector(".pub-actions");
+  if (actions) actions.classList.toggle("open");
+});
+
+pubListEl.addEventListener("click", (event) => {
+  const target = event.target;
+  if (!(target instanceof HTMLElement)) return;
+  if (!target.classList.contains("pub-btn")) return;
     if (target.tagName.toLowerCase() === "a") return;
 
     const item = target.closest(".pub-item");
