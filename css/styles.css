@@ -512,6 +512,14 @@ h2 {
   padding: clamp(0.85rem, 2vw, 1.1rem);
 }
 
+.research-lay-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(0.6rem, 1.5vw, 1rem);
+  flex-wrap: wrap;
+}
+
 .research-lay {
   margin: 0;
   padding: 0.58rem 0.66rem;
@@ -521,6 +529,58 @@ h2 {
   color: #334862;
   line-height: 1.62;
   font-size: 0.93rem;
+}
+
+.research-expand-btn {
+  margin: 0;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  border: 1px solid #e3e7ef;
+  background: #fff;
+  color: #1f4f95;
+  font-size: 0.82rem;
+  font-family: "Source Sans 3", "Segoe UI", sans-serif;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  box-shadow: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.research-expand-btn:hover,
+.research-expand-btn:focus-visible {
+  border-color: #a5b3cf;
+  box-shadow: 0 3px 8px rgba(15, 56, 122, 0.17);
+}
+
+.research-expand-btn::focus-visible {
+  outline: 2px solid #1f4f95;
+  outline-offset: 3px;
+}
+
+.research-expand-btn.is-open {
+  border-color: #c1c7d7;
+  box-shadow: none;
+}
+
+.research-detail {
+  margin-top: 0.2rem;
+}
+
+.research-expand-icon {
+  display: inline-flex;
+  transition: transform 0.2s ease;
+}
+
+.research-expand-btn.is-open .research-expand-icon {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 640px) {
+  .research-lay-row {
+    flex-direction: column;
+  }
 }
 
 .lay-label {

@@ -77,47 +77,55 @@
           </div>
 
           <div class="research-panel">
-            <p class="research-lay">
-              <span class="lay-label">Lay summary.</span> We build AI systems that learn from data and use logic, so they can make more reliable
-              decisions.
-            </p>
-            <p class="research-context">
-              Simply turning logic into continuous formulas can break learning in subtle ways
-              <a class="ref-tag" data-ref-key="he2024RILL" href="full-publications.html#pub-he2024rill">J?</a>.
-              Instead, we need hybrid systems that carefully balance learning and reasoning.
-              We focus on three practical questions:
-            </p>
+            <div class="research-lay-row">
+              <p class="research-lay">
+                <span class="lay-label">Lay summary.</span> We build AI systems that learn from data and use logic, so they can make more reliable
+                decisions.
+              </p>
+              <button class="research-expand-btn" type="button" data-action="toggle-research-detail" aria-expanded="false">
+                <span class="research-expand-label">Show details</span>
+                <span class="research-expand-icon" aria-hidden="true">▾</span>
+              </button>
+            </div>
+            <div class="research-detail" hidden>
+              <p class="research-context">
+                Simply turning logic into continuous formulas can break learning in subtle ways
+                <a class="ref-tag" data-ref-key="he2024RILL" href="full-publications.html#pub-he2024rill">J?</a>.
+                Instead, we need hybrid systems that carefully balance learning and reasoning.
+                We focus on three practical questions:
+              </p>
 
-            <ol class="research-questions">
-              <li>
-                <h3>When can hybrid systems actually learn?</h3>
-                <p>
-                  Hybrid systems like abductive learning preserve the full capacity of learning and reasoning.
-                  We establish a PAC learnability condition for such systems.
-                  <a class="ref-tag" data-ref-key="he2025AnalysisOnNeSy" href="full-publications.html#pub-he2025analysisonnesy">C?</a>.
-                </p>
-              </li>
-              <li>
-                <h3>How do we handle ambiguity?</h3>
-                <p>
-                  Symbolic system feedback is often non-unique and ambiguous. We design methods that explicitly account for multiple plausible explanations and
-                  learn from them efficiently
-                  <a class="ref-tag" data-ref-key="he2024a3bl" href="full-publications.html#pub-he2024a3bl">C?</a>.
-                </p>
-              </li>
-              <li>
-                <h3>How do we speed up reasoning?</h3>
-                <p>
-                  Logical reasoning problems are generally NP-hard and cannot always be solved quickly.
-                  We use learning-guided methods for fast, reliable approximation
-                  <a class="ref-tag" data-ref-key="he2026learning" href="full-publications.html#pub-he2026learning">P?</a>.
-                </p>
-              </li>
-            </ol>
+              <ol class="research-questions">
+                <li>
+                  <h3>When can hybrid systems actually learn?</h3>
+                  <p>
+                    Hybrid systems like abductive learning preserve the full capacity of learning and reasoning.
+                    We establish a PAC learnability condition for such systems.
+                    <a class="ref-tag" data-ref-key="he2025AnalysisOnNeSy" href="full-publications.html#pub-he2025analysisonnesy">C?</a>.
+                  </p>
+                </li>
+                <li>
+                  <h3>How do we handle ambiguity?</h3>
+                  <p>
+                    Symbolic system feedback is often non-unique and ambiguous. We design methods that explicitly account for multiple plausible explanations and
+                    learn from them efficiently
+                    <a class="ref-tag" data-ref-key="he2024a3bl" href="full-publications.html#pub-he2024a3bl">C?</a>.
+                  </p>
+                </li>
+                <li>
+                  <h3>How do we speed up reasoning?</h3>
+                  <p>
+                    Logical reasoning problems are generally NP-hard and cannot always be solved quickly.
+                    We use learning-guided methods for fast, reliable approximation
+                    <a class="ref-tag" data-ref-key="he2026learning" href="full-publications.html#pub-he2026learning">P?</a>.
+                  </p>
+                </li>
+              </ol>
 
-            <p class="research-note">
-              Our goal is to combine theory, algorithms, and computation to build robust hybrid AI systems for real-world use.
-            </p>
+              <p class="research-note">
+                Our goal is to combine theory, algorithms, and computation to build robust hybrid AI systems for real-world use.
+              </p>
+            </div>
           </div>
         </div>
       </section>
