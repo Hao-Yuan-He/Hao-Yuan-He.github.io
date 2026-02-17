@@ -497,6 +497,87 @@ h2 {
   opacity: 1;
 }
 
+.research-intro {
+  max-width: 74ch;
+  margin-bottom: 0.45rem;
+  color: #445267;
+  font-size: 0.99rem;
+}
+
+.research-panel {
+  border: 1px solid #d7e2f3;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+  box-shadow: 0 10px 26px rgba(22, 45, 84, 0.05);
+  padding: clamp(0.85rem, 2vw, 1.1rem);
+}
+
+.research-lay {
+  margin: 0;
+  padding: 0.58rem 0.66rem;
+  border: 1px solid #cbdbf3;
+  border-radius: 10px;
+  background: #eef5ff;
+  color: #334862;
+  line-height: 1.62;
+  font-size: 0.93rem;
+}
+
+.lay-label {
+  display: inline-block;
+  margin-right: 0.3rem;
+  color: #1f4f95;
+  font-weight: 600;
+}
+
+.research-context {
+  margin: 0.7rem 0 0;
+  max-width: 100ch;
+  color: #566176;
+  font-size: 0.93rem;
+}
+
+.research-questions {
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+  max-width: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.62rem;
+}
+
+.research-questions li {
+  border: 1px solid #dce5f4;
+  border-radius: 11px;
+  background: #ffffff;
+  padding: 0.58rem 0.64rem;
+}
+
+.research-questions h3 {
+  margin: 0 0 0.15rem;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: #1f2b3c;
+}
+
+.research-questions p {
+  margin: 0;
+  color: #566176;
+  font-size: 0.88rem;
+  line-height: 1.58;
+}
+
+.research-note {
+  margin: 0.72rem 0 0;
+  max-width: none;
+  color: #4e5f77;
+  font-size: 0.9rem;
+  line-height: 1.62;
+  border-left: 2px solid #cad9ee;
+  padding-left: 0.66rem;
+}
+
 .site-footer {
   padding: 2rem 0 2.5rem;
   border-top: 1px solid var(--border);
@@ -592,6 +673,10 @@ img {
   .pub-head {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .research-questions {
+    grid-template-columns: 1fr;
   }
 
   .pub-actions {
