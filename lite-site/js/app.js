@@ -1,5 +1,6 @@
 const pubListEl = document.getElementById("pub-list");
 const pubStatusEl = document.getElementById("pub-status");
+const newsListEl = document.getElementById("news-list");
 const publicationMode = document.body.dataset.publications || "selected";
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -257,6 +258,29 @@ function pubAnchorId(key) {
   return `pub-${String(key || "").toLowerCase().replace(/[^a-z0-9_-]/g, "")}`;
 }
 
+function sortNews(items) {
+  return [...items].sort((a, b) => {
+    const dateA = normalizeSpace(a.date || "");
+    const dateB = normalizeSpace(b.date || "");
+    if (dateA !== dateB) return dateB.localeCompare(dateA);
+    return normalizeSpace(a.content || "").localeCompare(normalizeSpace(b.content || ""));
+  });
+}
+
+function renderNews(items) {
+  if (!newsListEl) return;
+  newsListEl.innerHTML = "";
+
+  sortNews(items).forEach((item) => {
+    const li = document.createElement("li");
+    const strong = document.createElement("strong");
+    strong.textContent = `${normalizeSpace(item.date || "")}:`;
+    li.appendChild(strong);
+    li.appendChild(document.createTextNode(` ${normalizeSpace(item.content || "")}`));
+    newsListEl.appendChild(li);
+  });
+}
+
 function classifyEntry(entry) {
   const type = String(entry.type || "").toLowerCase();
   const abbr = String(entry.abbr || "").toLowerCase();
@@ -454,53 +478,56 @@ function updateIntroRefTags(tagMap) {
   });
 }
 
-pubListEl.addEventListener("click", (event) => {
-  const target = event.target;
-  if (!(target instanceof HTMLElement)) return;
-  if (!target.classList.contains("pub-btn")) return;
-  if (target.tagName.toLowerCase() === "a") return;
+if (pubListEl) {
+  pubListEl.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+    if (!target.classList.contains("pub-btn")) return;
+    if (target.tagName.toLowerCase() === "a") return;
 
-  const item = target.closest(".pub-item");
-  if (!item) return;
+    const item = target.closest(".pub-item");
+    if (!item) return;
 
-  const detail = item.querySelector(".pub-detail");
-  if (!detail) return;
-  const abs = item.querySelector(".pub-abstract");
-  const bibWrap = item.querySelector(".pub-bib-wrap");
-  const bib = item.querySelector(".pub-bib");
-  const action = target.dataset.action;
+    const detail = item.querySelector(".pub-detail");
+    if (!detail) return;
+    const abs = item.querySelector(".pub-abstract");
+    const bibWrap = item.querySelector(".pub-bib-wrap");
+    const bib = item.querySelector(".pub-bib");
+    const action = target.dataset.action;
 
-  if (action === "toggle-abs") {
-    if (!abs) return;
-    const willOpen = abs.hidden;
-    abs.hidden = !willOpen;
-    if (bibWrap) bibWrap.hidden = true;
-    detail.classList.toggle("open", willOpen);
-    return;
-  }
+    if (action === "toggle-abs") {
+      if (!abs) return;
+      const willOpen = abs.hidden;
+      abs.hidden = !willOpen;
+      if (bibWrap) bibWrap.hidden = true;
+      detail.classList.toggle("open", willOpen);
+      return;
+    }
 
-  if (action === "toggle-bib") {
-    if (!bibWrap) return;
-    const willOpen = bibWrap.hidden;
-    bibWrap.hidden = !willOpen;
-    if (abs) abs.hidden = true;
-    detail.classList.toggle("open", willOpen);
-    return;
-  }
+    if (action === "toggle-bib") {
+      if (!bibWrap) return;
+      const willOpen = bibWrap.hidden;
+      bibWrap.hidden = !willOpen;
+      if (abs) abs.hidden = true;
+      detail.classList.toggle("open", willOpen);
+      return;
+    }
 
-  if (action === "copy-bib") {
-    if (!bib) return;
-    const status = item.querySelector(".pub-copy-status");
-    copyToClipboard(bib.textContent || "").then((ok) => {
-      if (!status) return;
-      status.textContent = ok ? "BibTeX copied." : "Failed to copy BibTeX.";
-      status.classList.add("show");
-      window.setTimeout(() => status.classList.remove("show"), 1200);
-    });
-  }
-});
+    if (action === "copy-bib") {
+      if (!bib) return;
+      const status = item.querySelector(".pub-copy-status");
+      copyToClipboard(bib.textContent || "").then((ok) => {
+        if (!status) return;
+        status.textContent = ok ? "BibTeX copied." : "Failed to copy BibTeX.";
+        status.classList.add("show");
+        window.setTimeout(() => status.classList.remove("show"), 1200);
+      });
+    }
+  });
+}
 
-async function init() {
+async function initPublications() {
+  if (!pubListEl || !pubStatusEl) return;
   try {
     const res = await fetch("data/papers.bib");
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -519,4 +546,18 @@ async function init() {
   }
 }
 
-init();
+async function initNews() {
+  if (!newsListEl) return;
+  try {
+    const res = await fetch("data/news.json");
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const payload = await res.json();
+    const items = Array.isArray(payload.news) ? payload.news : [];
+    renderNews(items);
+  } catch (err) {
+    newsListEl.innerHTML = "";
+  }
+}
+
+initPublications();
+initNews();
