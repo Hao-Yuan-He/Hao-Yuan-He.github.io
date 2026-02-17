@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Font Demo | Hao-Yuan He</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Domine:wght@400;600;700&family=EB+Garamond:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;600;700&family=Libre+Baskerville:wght@400;700&family=Lora:wght@400;600;700&family=Manrope:wght@400;500;700;800&family=Merriweather:wght@400;700&family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&family=Noto+Serif:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=PT+Serif:wght@400;700&family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Space+Grotesk:wght@400;500;600;700&family=Spectral:wght@400;600;700&family=Work+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --panel: #ffffff;
+        --text: #1e2430;
+        --muted: #5b6474;
+        --border: #d8dfeb;
+        --accent: #1f5fbf;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--text);
+        background: radial-gradient(circle at top left, #ebf2ff 0%, var(--bg) 45%, #f8fafc 100%);
+        font-family: "Source Sans 3", sans-serif;
+      }
+
+      .wrap {
+        width: min(1080px, 94vw);
+        margin: 0 auto;
+        padding: 2rem 0 2.8rem;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(1.7rem, 3vw, 2.3rem);
+      }
+
+      .intro {
+        margin: 0.45rem 0 1.2rem;
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 0.85rem;
+      }
+
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 0.9rem 0.95rem;
+        box-shadow: 0 8px 20px rgba(18, 41, 77, 0.06);
+      }
+
+      .card h2 {
+        margin: 0;
+        font-size: 1rem;
+        color: #16345f;
+      }
+
+      .pair {
+        margin: 0.28rem 0 0.8rem;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      .sample-title {
+        margin: 0 0 0.35rem;
+        line-height: 1.25;
+        font-size: 1.2rem;
+      }
+
+      .sample-text {
+        margin: 0;
+        color: #334157;
+        line-height: 1.58;
+      }
+
+      .chips {
+        margin-top: 0.65rem;
+        display: flex;
+        gap: 0.35rem;
+        flex-wrap: wrap;
+      }
+
+      .chip {
+        border: 1px solid #c9d8f1;
+        border-radius: 5px;
+        background: #eef4ff;
+        color: #1d4f98;
+        font-size: 0.7rem;
+        font-family: "IBM Plex Sans", sans-serif;
+        padding: 0.08rem 0.4rem;
+      }
+
+      .mono {
+        margin-top: 1rem;
+        color: var(--muted);
+        font-size: 0.84rem;
+      }
+
+      .mono code {
+        background: #eef2f8;
+        border: 1px solid #d5dceb;
+        border-radius: 6px;
+        padding: 0.14rem 0.35rem;
+      }
+
+      .f1 .sample-title { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800; }
+      .f1 .sample-text { font-family: "Source Sans 3", sans-serif; }
+
+      .f2 .sample-title { font-family: "Space Grotesk", sans-serif; font-weight: 700; }
+      .f2 .sample-text { font-family: "Work Sans", sans-serif; }
+
+      .f3 .sample-title { font-family: "Manrope", sans-serif; font-weight: 800; }
+      .f3 .sample-text { font-family: "IBM Plex Sans", sans-serif; }
+
+      .f4 .sample-title { font-family: "IBM Plex Serif", serif; font-weight: 600; }
+      .f4 .sample-text { font-family: "IBM Plex Sans", sans-serif; }
+
+      .f5 .sample-title { font-family: "Lora", serif; font-weight: 700; }
+      .f5 .sample-text { font-family: "Source Sans 3", sans-serif; }
+
+      .f6 .sample-title { font-family: "Spectral", serif; font-weight: 700; }
+      .f6 .sample-text { font-family: "Work Sans", sans-serif; }
+
+      .f7 .sample-title { font-family: "Merriweather", serif; font-weight: 700; }
+      .f7 .sample-text { font-family: "IBM Plex Sans", sans-serif; }
+
+      .f8 .sample-title { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 700; }
+      .f8 .sample-text { font-family: "IBM Plex Sans", sans-serif; }
+
+      .f9 .sample-title { font-family: "Source Serif 4", serif; font-weight: 700; }
+      .f9 .sample-text { font-family: "Source Sans 3", sans-serif; }
+
+      .f10 .sample-title { font-family: "EB Garamond", serif; font-weight: 700; }
+      .f10 .sample-text { font-family: "IBM Plex Sans", sans-serif; }
+
+      .f11 .sample-title { font-family: "Newsreader", serif; font-weight: 700; }
+      .f11 .sample-text { font-family: "Plus Jakarta Sans", sans-serif; }
+
+      .f12 .sample-title { font-family: "PT Serif", serif; font-weight: 700; }
+      .f12 .sample-text { font-family: "Work Sans", sans-serif; }
+
+      .f13 .sample-title { font-family: "Crimson Text", serif; font-weight: 700; }
+      .f13 .sample-text { font-family: "Source Sans 3", sans-serif; }
+
+      .f14 .sample-title { font-family: "Libre Baskerville", serif; font-weight: 700; }
+      .f14 .sample-text { font-family: "Manrope", sans-serif; }
+
+      .f15 .sample-title { font-family: "Domine", serif; font-weight: 700; }
+      .f15 .sample-text { font-family: "IBM Plex Sans", sans-serif; }
+
+      .f16 .sample-title { font-family: "Noto Serif", serif; font-weight: 700; }
+      .f16 .sample-text { font-family: "Plus Jakarta Sans", sans-serif; }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <h1>Font Pair Demo</h1>
+      <p class="intro">Serif publication titles + sans regular text. Compare pairs and pick one style direction.</p>
+
+      <section class="grid">
+        <article class="card f1">
+          <h2>Option 1</h2>
+          <p class="pair">Plus Jakarta Sans + Source Sans 3</p>
+          <h3 class="sample-title">A Learnability Analysis on Neuro-Symbolic Learning</h3>
+          <p class="sample-text">Clean, modern, and highly readable for long publication lists and compact metadata blocks.</p>
+          <div class="chips"><span class="chip">NeurIPS</span><span class="chip">Spotlight</span><span class="chip">C1</span></div>
+        </article>
+
+        <article class="card f2">
+          <h2>Option 2</h2>
+          <p class="pair">Space Grotesk + Work Sans</p>
+          <h3 class="sample-title">Ambiguity-Aware Abductive Learning</h3>
+          <p class="sample-text">Technical and modern. Strong heading character with neutral body copy.</p>
+          <div class="chips"><span class="chip">ICML</span><span class="chip">C2</span></div>
+        </article>
+
+        <article class="card f3">
+          <h2>Option 3</h2>
+          <p class="pair">Manrope + IBM Plex Sans</p>
+          <h3 class="sample-title">Reduced Implication-bias Logic Loss</h3>
+          <p class="sample-text">Friendly geometric look while keeping detail-level readability.</p>
+          <div class="chips"><span class="chip">MLJ</span><span class="chip">J1</span></div>
+        </article>
+
+        <article class="card f4">
+          <h2>Option 4</h2>
+          <p class="pair">IBM Plex Serif + IBM Plex Sans</p>
+          <h3 class="sample-title">Probabilistic Instance Dependent Label Refinement</h3>
+          <p class="sample-text">Academic tone with modern UI compatibility.</p>
+          <div class="chips"><span class="chip">MLJ</span><span class="chip">J2</span></div>
+        </article>
+
+        <article class="card f5">
+          <h2>Option 5</h2>
+          <p class="pair">Lora + Source Sans 3</p>
+          <h3 class="sample-title">Learning-Augmented Smooth Integer Programs</h3>
+          <p class="sample-text">Elegant serif heading and neutral body for balanced contrast.</p>
+          <div class="chips"><span class="chip">Preprint</span><span class="chip">P1</span></div>
+        </article>
+
+        <article class="card f6">
+          <h2>Option 6</h2>
+          <p class="pair">Spectral + Work Sans</p>
+          <h3 class="sample-title">Weakly Supervised AUC Optimization</h3>
+          <p class="sample-text">More editorial and distinctive without hurting legibility.</p>
+          <div class="chips"><span class="chip">TPAMI</span><span class="chip">J3</span></div>
+        </article>
+
+        <article class="card f7">
+          <h2>Option 7</h2>
+          <p class="pair">Merriweather + IBM Plex Sans</p>
+          <h3 class="sample-title">Publication-Centric Personal Site Typography</h3>
+          <p class="sample-text">Classic academic heading style, stable and formal tone.</p>
+          <div class="chips"><span class="chip">Demo</span><span class="chip">D1</span></div>
+        </article>
+
+        <article class="card f8">
+          <h2>Option 8</h2>
+          <p class="pair">Plus Jakarta Sans + IBM Plex Sans</p>
+          <h3 class="sample-title">Compact Visual System for Research Pages</h3>
+          <p class="sample-text">Best all-around modern UI pair, especially for clean cards and badges.</p>
+          <div class="chips"><span class="chip">Recommended</span></div>
+        </article>
+
+        <article class="card f9">
+          <h2>Option 9</h2>
+          <p class="pair">Source Serif 4 + Source Sans 3</p>
+          <h3 class="sample-title">Structured Typography for Publication Lists</h3>
+          <p class="sample-text">Highly balanced serif/sans pair with excellent readability and modern rhythm.</p>
+          <div class="chips"><span class="chip">Strong Candidate</span></div>
+        </article>
+
+        <article class="card f10">
+          <h2>Option 10</h2>
+          <p class="pair">EB Garamond + IBM Plex Sans</p>
+          <h3 class="sample-title">A Learnability Analysis on Neuro-Symbolic Learning</h3>
+          <p class="sample-text">Classic academic serif title style with clean technical body text.</p>
+          <div class="chips"><span class="chip">Elegant</span></div>
+        </article>
+
+        <article class="card f11">
+          <h2>Option 11</h2>
+          <p class="pair">Newsreader + Plus Jakarta Sans</p>
+          <h3 class="sample-title">Ambiguity-Aware Abductive Learning</h3>
+          <p class="sample-text">Editorial serif feel with contemporary sans UI support.</p>
+          <div class="chips"><span class="chip">Modern + Serif</span></div>
+        </article>
+
+        <article class="card f12">
+          <h2>Option 12</h2>
+          <p class="pair">PT Serif + Work Sans</p>
+          <h3 class="sample-title">Reduced Implication-bias Logic Loss</h3>
+          <p class="sample-text">Safe and crisp pair, good if you prefer less stylistic risk.</p>
+          <div class="chips"><span class="chip">Stable</span></div>
+        </article>
+
+        <article class="card f13">
+          <h2>Option 13</h2>
+          <p class="pair">Crimson Text + Source Sans 3</p>
+          <h3 class="sample-title">Probabilistic Instance Dependent Label Refinement</h3>
+          <p class="sample-text">Bookish title character while keeping body text neutral and clear.</p>
+          <div class="chips"><span class="chip">Academic</span></div>
+        </article>
+
+        <article class="card f14">
+          <h2>Option 14</h2>
+          <p class="pair">Libre Baskerville + Manrope</p>
+          <h3 class="sample-title">Learning-Augmented Smooth Integer Programs</h3>
+          <p class="sample-text">More contrast-heavy pair with strong headline personality.</p>
+          <div class="chips"><span class="chip">Distinctive</span></div>
+        </article>
+
+        <article class="card f15">
+          <h2>Option 15</h2>
+          <p class="pair">Domine + IBM Plex Sans</p>
+          <h3 class="sample-title">Weakly Supervised AUC Optimization</h3>
+          <p class="sample-text">Dense and technical look; good for compact publication cards.</p>
+          <div class="chips"><span class="chip">Compact</span></div>
+        </article>
+
+        <article class="card f16">
+          <h2>Option 16</h2>
+          <p class="pair">Noto Serif + Plus Jakarta Sans</p>
+          <h3 class="sample-title">Publication-Centric Personal Site Typography</h3>
+          <p class="sample-text">Neutral and multilingual-friendly serif/sans pairing.</p>
+          <div class="chips"><span class="chip">Multilingual</span></div>
+        </article>
+      </section>
+
+      <p class="mono">Demo page: <code>lite-site/font-demo.html</code></p>
+    </main>
+  </body>
+</html>
