@@ -1,0 +1,10 @@
+/* Page-only adjustments for the full Professional Activities view. */
+
+.professional-activities-page .profile-nav a[aria-current="page"] {
+  color: #2f6f9f !important;
+  text-decoration: none !important;
+}
+
+.professional-activities-page .service-section {
+  padding-top: 44px !important;
+}
