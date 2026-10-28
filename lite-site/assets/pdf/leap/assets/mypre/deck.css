@@ -1,0 +1,411 @@
+/*
+ * mypre default design tokens.
+ *
+ * `--mypre-unit` is one reference-canvas unit: exactly 1px at the 1512x850 CSS
+ * reference canvas, and proportionally smaller or larger otherwise. Every role
+ * size is written as `calc(var(--mypre-unit) * N)` where N is the pixel size at
+ * that reference canvas, so authors never convert rem ratios and a body-size
+ * change never drags the title or evidence sizes with it.
+ *
+ * Override any token from a presentation's own `style.css` (loaded after this
+ * file) to change one role; see docs/theme-authoring.md.
+ */
+:root {
+  /* Canvas scale: the limiting axis of the 16:9 canvas, floored for tiny
+     windows and capped so very large displays do not grow without bound. */
+  --mypre-unit: clamp(0.5px, min(calc(100vw / 1512), calc(100vh / 850)), 1.1767px);
+
+  /* Typographic roles, in reference-canvas pixels. */
+  --mypre-size-title: calc(var(--mypre-unit) * 40);
+  --mypre-size-body: calc(var(--mypre-unit) * 30);
+  --mypre-size-takeaway: calc(var(--mypre-unit) * 32);
+  --mypre-size-evidence-heading: calc(var(--mypre-unit) * 24);
+  --mypre-size-evidence-text: calc(var(--mypre-unit) * 21);
+  --mypre-size-heading-small: calc(var(--mypre-unit) * 20);
+  --mypre-size-heading-minor: calc(var(--mypre-unit) * 19);
+
+  --mypre-leading-body: 1.4;
+  --mypre-leading-takeaway: 1.35;
+  --mypre-leading-evidence: 1.42;
+
+  /* Authored vertical rhythm, in reference-canvas pixels. These keep the
+     unscaled author values; the adaptive gap scale is applied where a gap is
+     used (base.css), so a presentation can still override any single gap. */
+  --mypre-gap-block: calc(var(--mypre-unit) * 16.5);
+  --mypre-gap-paragraph: calc(var(--mypre-unit) * 15);
+  --mypre-gap-list: calc(var(--mypre-unit) * 18);
+  --mypre-gap-figure: calc(var(--mypre-unit) * 13.5);
+
+  /* Evidence media. */
+  --mypre-image-width: 68%;
+  --mypre-image-height: 42vh;
+
+  /* Slide frame: the inset between the slide edge and its content box. */
+  --mypre-slide-padding-top: clamp(22px, 3.2vh, 40px);
+  --mypre-slide-padding-x: clamp(26px, 4.2vw, 64px);
+  --mypre-slide-padding-bottom: clamp(48px, 5.6vh, 60px);
+
+  /* Slide background accent: one flat bar painted as a single non-repeating
+     gradient layer on `.slide`, not attached to any heading (see base.css).
+     `x`/`y` are offsets from the slide's outer corner (border box). Move it by
+     overriding these four tokens from project CSS; disable it with
+     `--mypre-accent-height: 0` or `background-image: none` on `.slide`. */
+  --mypre-accent-width: calc(var(--mypre-unit) * 140);
+  --mypre-accent-height: calc(var(--mypre-unit) * 4);
+  --mypre-accent-x: var(--mypre-slide-padding-x);
+  --mypre-accent-y: calc(var(--mypre-slide-padding-top) + var(--mypre-unit) * 60);
+
+  /* Space kept below a slide title now that the accent is a background motif.
+     The removed `h1::after` contributed exactly 0.22em margin + 0.1em height
+     inside the title box, so the same 0.32em lives on as title padding and
+     never depends on the accent's geometry. Padding is used rather than a
+     margin because a title's bottom margin collapses with the surrounding
+     block's margin, which would silently swallow part of the clearance. */
+  --mypre-heading-clearance: 0.32em;
+
+  /* Palette. */
+  --mypre-bg: #eef1f4;
+  --mypre-slide-bg: #ffffff;
+  --mypre-ink: #1a1f29;
+  --mypre-strong: #123f70;
+  --mypre-accent: #1d4e89;
+  --mypre-muted: #59616e;
+  --mypre-rule: #dde1e7;
+  --mypre-code-bg: #f2f4f7;
+  --mypre-warn: #a05a00;
+  --mypre-slide-radius: 8px;
+  --mypre-slide-shadow: 0 14px 40px rgba(20, 27, 38, 0.14);
+
+  /* Automatic content-aware spacing (opt-in).
+     A presentation enables it with `--mypre-adaptive: 1` and may tune the
+     bounds. The runtime writes `--mypre-space` (0..1) per slide; the derived
+     values below turn that into an effective body leading and gap scale. With
+     `--mypre-adaptive: 0` (default) both derived values equal the authored
+     ones, so decks that do not opt in keep their exact geometry. */
+  --mypre-adaptive: 0;
+  --mypre-space: 0.5;
+  --mypre-leading-min: 1.3;
+  --mypre-leading-max: 1.65;
+  --mypre-gap-scale-min: 0.9;
+  --mypre-gap-scale-max: 1.5;
+  /* Comfort target: the largest spacing is only used while the rendered
+     content stays within this share of the usable frame. 1 (default) means
+     "as loose as still fits"; a lower value backs the fullest slides off for
+     more visible whitespace. */
+  --mypre-fill-target: 1;
+
+  /*
+   * Runtime-resolved spacing values. These mirror the public tokens by default
+   * so a deck still behaves without JavaScript. The runtime overwrites only
+   * these `--mypre-resolved-*` names (never the public tokens) and re-resolves
+   * them on every settle, so an author's media queries on the public tokens
+   * keep their authority across resizes.
+   */
+  --mypre-resolved-adaptive: var(--mypre-adaptive);
+  --mypre-resolved-leading-min: var(--mypre-leading-min);
+  --mypre-resolved-leading-max: var(--mypre-leading-max);
+  --mypre-resolved-gap-min: var(--mypre-gap-scale-min);
+  --mypre-resolved-gap-max: var(--mypre-gap-scale-max);
+  --mypre-resolved-fill-target: var(--mypre-fill-target);
+}
+
+/*
+ * Derived spacing values are declared on `.slide`, not on `:root`: custom
+ * properties resolve their `var()` references where they are declared, so a
+ * chain left on `:root` would bake in the root's `--mypre-space` and ignore the
+ * per-slide value. Everything below therefore recomputes per slide.
+ */
+.slide {
+  --mypre-adaptive-leading: calc(
+    var(--mypre-resolved-leading-min) +
+      (var(--mypre-resolved-leading-max) - var(--mypre-resolved-leading-min)) * var(--mypre-space)
+  );
+  --mypre-adaptive-gap: calc(
+    var(--mypre-resolved-gap-min) + (var(--mypre-resolved-gap-max) - var(--mypre-resolved-gap-min)) * var(--mypre-space)
+  );
+  --mypre-leading: calc(
+    var(--mypre-leading-body) +
+      var(--mypre-resolved-adaptive) * (var(--mypre-adaptive-leading) - var(--mypre-leading-body))
+  );
+  --mypre-gap-scale: calc(1 + var(--mypre-resolved-adaptive) * (var(--mypre-adaptive-gap) - 1));
+}
+
+/* mypre base layout and components. Role sizes come from tokens.css. */
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--mypre-bg);
+  color: var(--mypre-ink);
+  font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  font-size: var(--mypre-size-body);
+  line-height: var(--mypre-leading-body);
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#deck {
+  position: relative;
+  width: min(96vw, calc(96vh * 16 / 9));
+  height: min(96vh, calc(96vw * 9 / 16));
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+  overflow: auto;
+  /* Effective leading; blends the authored leading with the adaptive bounds
+     using this slide's --mypre-space (see tokens.css). */
+  line-height: var(--mypre-leading);
+  /* The accent is one non-repeating background layer over the slide colour, so
+     it exists on titleless slides too and can never double up on a slide with
+     two headings. It is painted from the slide's border box (see
+     background-origin below), so it ignores heading count, font size, text
+     wrapping and text alignment and does not move when the slide scrolls. */
+  background-color: var(--mypre-slide-bg);
+  background-image: linear-gradient(var(--mypre-accent), var(--mypre-accent));
+  background-repeat: no-repeat;
+  /* Anchor the motif to the slide's outer edge, so an author adding a border
+     moves the frame without moving the accent. */
+  background-origin: border-box;
+  background-size: var(--mypre-accent-width) var(--mypre-accent-height);
+  background-position: var(--mypre-accent-x) var(--mypre-accent-y);
+  border-radius: var(--mypre-slide-radius);
+  box-shadow: var(--mypre-slide-shadow);
+  /* The larger bottom padding reserves room for the fixed controls so they
+     never cover slide content. */
+  padding: var(--mypre-slide-padding-top) var(--mypre-slide-padding-x) var(--mypre-slide-padding-bottom);
+}
+
+.slide.is-active { display: block; }
+/* Reveal steps (<!-- step -->): blocks of a later step, and a step-only block
+   outside its own step, take no space, so the remaining content closes up. */
+.slide .block.is-step-hidden { display: none; }
+
+.slide__content { display: flow-root; }
+
+.block { margin: 0 0 calc(var(--mypre-gap-block) * var(--mypre-gap-scale)); }
+.block:last-child { margin-bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  margin: 0 0 calc(0.35em * var(--mypre-gap-scale));
+  color: var(--mypre-ink);
+  font-weight: 650;
+}
+/* Role sizes are fixed tokens: the slide title stays ~42 reference px while
+   the narration is ~30, and the evidence heading ~26 sits below both. The
+   evidence heading is a label for supporting material, not a competing
+   headline, and smaller headings follow it. */
+h1 {
+  font-size: var(--mypre-size-title);
+  letter-spacing: -0.012em;
+  /* The title keeps the room its own underline used to occupy, as ordinary
+     clearance inside its own box: removing the decoration must not pull the
+     copy upward. Padding, not margin, because a heading's bottom margin
+     collapses with the enclosing block's margin. */
+  padding-bottom: var(--mypre-heading-clearance);
+}
+h2 { font-size: var(--mypre-size-evidence-heading); }
+h3 { font-size: var(--mypre-size-heading-small); }
+h4, h5, h6 { font-size: var(--mypre-size-heading-minor); }
+p { margin: 0 0 calc(var(--mypre-gap-paragraph) * var(--mypre-gap-scale)); }
+p:last-child { margin-bottom: 0; }
+a { color: var(--mypre-accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+/* Inline emphasis keeps the surrounding size and baseline; only weight and
+   colour change, so a sentence stays one continuous line of text. */
+strong { font-weight: 720; color: var(--mypre-strong); }
+
+/* A paragraph whose entire visible content is one bold run is a key statement
+   (class added by the renderer from the inline AST). */
+p.statement {
+  font-size: var(--mypre-size-takeaway);
+  line-height: var(--mypre-leading-takeaway);
+  font-weight: 720;
+  color: var(--mypre-strong);
+  margin: 0;
+}
+
+del { color: var(--mypre-muted); }
+
+ul, ol { margin: 0 0 calc(var(--mypre-gap-list) * var(--mypre-gap-scale)); padding-left: 1.45em; }
+li { margin: calc(0.14em * var(--mypre-gap-scale)) 0; }
+li > ul, li > ol { margin: calc(0.2em * var(--mypre-gap-scale)) 0; }
+
+blockquote {
+  margin: 0 0 calc(0.7em * var(--mypre-gap-scale));
+  padding: 0.15em 0 0.15em 0.85em;
+  border-left: 3px solid var(--mypre-accent);
+  color: var(--mypre-ink);
+  /* Evidence text keeps its own independent role size, so it neither follows
+     the narration nor keeps shrinking when blockquotes are nested. */
+  font-size: var(--mypre-size-evidence-text);
+  line-height: var(--mypre-leading-evidence);
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--mypre-rule);
+  margin: calc(1.2em * var(--mypre-gap-scale)) 0;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0 0 calc(0.9em * var(--mypre-gap-scale));
+  font-size: 0.94em;
+  width: 100%;
+}
+th, td {
+  border: 1px solid var(--mypre-rule);
+  padding: 0.35em 0.6em;
+  text-align: left;
+  vertical-align: top;
+}
+th { background: #f1f3f6; font-weight: 650; }
+
+pre.shiki, .raw-html {
+  margin: 0 0 calc(0.9em * var(--mypre-gap-scale));
+  padding: 0.8em 0.95em;
+  overflow-x: auto;
+  border-radius: 6px;
+  border: 1px solid var(--mypre-rule);
+  font-size: 0.84em;
+  line-height: 1.45;
+}
+pre.shiki code, .raw-html code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  background: none;
+}
+.raw-html { background: var(--mypre-code-bg); color: var(--mypre-muted); }
+.raw-html code { white-space: pre-wrap; }
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  background: var(--mypre-code-bg);
+  border-radius: 4px;
+  padding: 0.08em 0.3em;
+  font-size: 0.92em;
+}
+
+/* Evidence images are centred and subordinate to the text: capped at a share
+   of the content width and of the viewport height, never upscaled. */
+figure.figure {
+  max-width: var(--mypre-image-width);
+  margin: calc(var(--mypre-gap-figure) * var(--mypre-gap-scale)) auto;
+}
+figure.figure img {
+  display: block;
+  max-width: 100%;
+  max-height: var(--mypre-image-height);
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+.asset-missing {
+  display: inline-block;
+  border: 1px dashed var(--mypre-warn);
+  color: var(--mypre-warn);
+  border-radius: 6px;
+  padding: 0.3em 0.55em;
+  font-size: 0.9em;
+}
+
+.katex { font-size: 1.02em; }
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* KaTeX ships `margin: 1em 0`; keep that exact authored value when
+     adaptation is off and scale only the surrounding gap when it is on.
+     KaTeX's internal spacing is never touched. */
+  margin: calc(1em * var(--mypre-gap-scale)) 0;
+}
+.math-error {
+  color: #a3261a;
+  background: #fdecea;
+}
+
+.mermaid { margin: 0 0 calc(0.9em * var(--mypre-gap-scale)); text-align: center; }
+.mermaid svg { max-width: 100%; height: auto; }
+
+.controls {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--mypre-muted);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--mypre-rule);
+  border-radius: 999px;
+  padding: 6px 10px;
+  backdrop-filter: blur(4px);
+}
+.controls button {
+  font: inherit;
+  color: var(--mypre-ink);
+  background: #fff;
+  border: 1px solid var(--mypre-rule);
+  border-radius: 6px;
+  padding: 2px 9px;
+  cursor: pointer;
+}
+.controls button:hover { border-color: var(--mypre-accent); color: var(--mypre-accent); }
+.controls__counter { min-width: 3.6em; text-align: center; font-variant-numeric: tabular-nums; }
+
+/* Playback chrome. The status bubble is absolutely positioned so a message can
+   never change the size or position of the navigation bar. */
+.controls__status {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 8px);
+  max-width: 62vw;
+  margin: 0;
+  padding: 6px 10px;
+  text-align: left;
+  color: var(--mypre-ink);
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--mypre-rule);
+  border-radius: 8px;
+  box-shadow: var(--mypre-slide-shadow);
+}
+.controls__status[data-tone="warn"] { color: var(--mypre-warn); border-color: var(--mypre-warn); }
+@media (prefers-reduced-motion: no-preference) {
+  .controls { transition: opacity 240ms ease-out; }
+}
+
+/* Fullscreen keeps the letterboxed 16:9 deck on the page background, and the
+   chrome steps aside while the presenter is not interacting with it. A focused
+   control always stays visible, from CSS as well as from the runtime. */
+html:fullscreen { background: var(--mypre-bg); }
+html[data-mypre-chrome="hidden"] .controls { opacity: 0; pointer-events: none; }
+html[data-mypre-chrome="hidden"] .controls:has(:focus-visible) { opacity: 1; pointer-events: auto; }
+
+/* Presenter previews (?mypre-embed=1) are real slides with no audience chrome,
+   no keyboard capture and no presenter button of their own. */
+html[data-mypre-embed] .controls { display: none; }
+
+/* Adaptive spacing measures every slide before first paint; hide the deck
+   until it reports settled so no spacing change is visible. When adaptation
+   is off (or JS never runs) the attribute is absent and nothing is hidden. */
+html[data-mypre-spacing="pending"]:not([data-mypre-ready]) #deck { visibility: hidden; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Fade the content blocks, not the slide: its background, accent rules and
+     any fixed chrome stay still when the page changes. Only a page change
+     fades (the runtime marks it briefly); reveal steps appear at once. */
+  .slide.is-active[data-mypre-entering] .slide__content > .block { animation: mypre-fade 150ms ease-out; }
+  @keyframes mypre-fade { from { opacity: 0.4; } to { opacity: 1; } }
+}

@@ -1,0 +1,344 @@
+/* Awards-inspired theme with bundled Work Sans. Shared theme stays unchanged. */
+@font-face {
+  font-family: "Work Sans";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: block;
+  src: url("../fonts/assets/fonts/WorkSans-wght.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Work Sans";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: block;
+  src: url("../fonts/assets/fonts/WorkSans-Italic-wght.ttf") format("truetype");
+}
+html, body {
+  font-family: "Work Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+:root {
+  /* A uniform title size accommodates the seminar's long English headings. */
+  --mypre-size-title: calc(var(--mypre-unit) * 40);
+  --mypre-size-body: calc(var(--mypre-unit) * 29);
+  --mypre-size-takeaway: calc(var(--mypre-unit) * 33);
+  --mypre-ink: #25232a;
+  --mypre-strong: #633475;
+  --mypre-accent: #633475;
+  --mypre-muted: #706b75;
+  --mypre-bg: #f2f1f3;
+  --mypre-rule: #e8e2ec;
+  --mypre-slide-radius: 0;
+  --mypre-slide-shadow: none;
+  --mypre-slide-padding-top: calc(var(--mypre-unit) * 62);
+  --mypre-slide-padding-x: calc(var(--mypre-unit) * 88);
+  --mypre-slide-padding-bottom: calc(var(--mypre-unit) * 62);
+  --mypre-accent-width: 75%;
+  --mypre-accent-height: calc(var(--mypre-unit) * 3);
+  --mypre-accent-y: calc(var(--mypre-unit) * 125);
+
+  /* Authored rhythm is scaled per slide by the existing occupancy-based runtime. */
+  --mypre-gap-block: calc(var(--mypre-unit) * 28);
+  --mypre-gap-paragraph: calc(var(--mypre-unit) * 25);
+  --mypre-gap-list: calc(var(--mypre-unit) * 24);
+  --mypre-gap-figure: calc(var(--mypre-unit) * 20);
+  --mypre-leading-body: 1.55;
+  --mypre-adaptive: 1;
+  --mypre-leading-min: 1.30;
+  --mypre-leading-max: 1.75;
+  --mypre-gap-scale-min: 0.60;
+  --mypre-gap-scale-max: 1.65;
+  --mypre-fill-target: 0.94;
+
+  /* Main talk ends at slide 25; subsequent slides have their own progress. */
+  --leap-main-slides: 25;
+
+  /* Preserve the reference-canvas caps; tall windows must not enlarge images
+     beyond the width-constrained 16:9 slide. These caps do not depend on density. */
+  --mypre-image-width: 100%;
+  --mypre-image-height: calc(var(--mypre-unit) * 340);
+}
+
+/* The eight-panel benchmark figure is tall; cap it so its two result lines fit. */
+.slide:has(img[src$="maxsat-benchmark.png"]) {
+  --mypre-image-height: calc(var(--mypre-unit) * 330);
+}
+
+/* The wide comparison uses a little more height without enlarging other figures. */
+.slide:has(img[src$="learning-augmented-comparison-v5.png"]) {
+  --mypre-image-height: calc(var(--mypre-unit) * 360);
+}
+
+/* One continuous colour band, flush with the slide's physical bottom edge. */
+.slide {
+  --leap-part-start: 1;
+  --leap-part-pages: 3;
+  --leap-part-base: 0%;
+  --leap-part-span: calc(100% / 8);
+  --leap-progress: clamp(0%, calc(var(--leap-part-base) + (var(--mypre-slide-number, 1) - var(--leap-part-start)) * var(--leap-part-span) / var(--leap-part-pages)), 100%);
+}
+.slide:has(.slide__content > .block:first-child p > strong:nth-child(2)) {
+  --leap-part-start: 4;
+  --leap-part-pages: 4;
+  --leap-part-base: calc(100% / 8);
+}
+.slide:has(.slide__content > .block:first-child p > strong:nth-child(3)) {
+  --leap-part-start: 8;
+  --leap-part-pages: 2;
+  --leap-part-base: calc(100% * 2 / 8);
+}
+.slide:has(.slide__content > .block:first-child p > strong:nth-child(4)) {
+  --leap-part-start: 10;
+  --leap-part-pages: 4;
+  --leap-part-base: calc(100% * 3 / 8);
+}
+.slide:has(.slide__content > .block:first-child p > strong:nth-child(5)) {
+  --leap-part-start: 14;
+  --leap-part-pages: 4;
+  --leap-part-base: calc(100% * 4 / 8);
+}
+.slide:has(.slide__content > .block:first-child p > strong:nth-child(6)) {
+  --leap-part-start: 18;
+  --leap-part-pages: 2;
+  --leap-part-base: calc(100% * 5 / 8);
+}
+.slide:has(.slide__content > .block:first-child p > strong:nth-child(7)) {
+  --leap-part-start: 20;
+  --leap-part-pages: 4;
+  --leap-part-base: calc(100% * 6 / 8);
+}
+.slide:has(.slide__content > .block:first-child p > strong:nth-child(8)) {
+  --leap-part-start: 24;
+  --leap-part-pages: 1;
+  --leap-part-base: calc(100% * 7 / 8);
+}
+.slide:has(.slide__content > .block:first-child p > strong:nth-child(9)) {
+  --leap-part-start: var(--leap-main-slides);
+  --leap-part-pages: calc(var(--mypre-slide-count, 29) - var(--leap-main-slides));
+  --leap-part-base: 0%;
+  --leap-part-span: 100%;
+}
+.slide::before, .slide::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: calc(var(--mypre-unit) * 36);
+  border-bottom: calc(var(--mypre-unit) * 1) solid #a68eb8;
+  pointer-events: none;
+}
+.slide::before { width: 100%; background: #f2edf6; }
+.slide::after {
+  width: var(--leap-progress);
+  background: linear-gradient(90deg, #ded2e8, #ccbdd8);
+}
+
+/* Concise one-line titles; the accent stays fixed to the slide canvas. */
+.slide:not(:first-child) {
+  background-image: linear-gradient(var(--mypre-accent), var(--mypre-accent));
+  background-position: left var(--mypre-slide-padding-x) top var(--mypre-accent-y);
+}
+.slide:not(:first-child) h1 { margin-bottom: 0; padding-bottom: 0; }
+.slide:not(:first-child) h1::after { content: none; }
+
+/* Keep authoring/playback chrome clear of the bottom navigation. */
+.controls, .legend { top: 14px; bottom: auto; }
+.controls__status { top: calc(100% + 8px); bottom: auto; }
+
+.slide__content > .block:first-child {
+  margin-bottom: calc(var(--mypre-unit) * 48 * var(--mypre-gap-scale));
+}
+
+/* The first Markdown block is a phase cue, visually placed in the footer.
+   display:contents keeps its fixed footer box out of the adaptive body-height
+   measurement, so sparse slides retain their more relaxed rhythm. */
+.slide:not(:first-child) .slide__content > .block:first-child {
+  display: contents;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.slide:not(:first-child) .slide__content > .block:first-child p {
+  position: absolute;
+  bottom: calc(var(--mypre-unit) * 18);
+  transform: translateY(50%);
+  z-index: 1;
+  left: 0;
+  right: 0;
+  display: grid;
+  /* Equal-width parts; each part advances according to its own page count. */
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  align-items: start;
+  gap: 0;
+  margin: 0;
+  color: #6a5b75;
+  font-size: calc(var(--mypre-unit) * 14);
+  line-height: 1.25;
+}
+/* Backup progress is separate; its caption identifies the appendix. */
+.slide:not(:first-child) .slide__content > .block:first-child p:has(> strong:nth-child(9)) {
+  grid-template-columns: 1fr;
+}
+.slide:not(:first-child) .slide__content > .block:first-child p:has(> strong:nth-child(9)) em {
+  display: none;
+}
+.slide:not(:first-child) .slide__content > .block:first-child :is(em, strong) {
+  position: relative;
+  display: block;
+  padding: 0;
+  font-style: normal;
+  font-size: inherit;
+  white-space: nowrap;
+  text-align: center;
+}
+.slide:not(:first-child) .slide__content > .block:first-child em:has(~ strong) {
+  color: #56445f;
+}
+.slide:not(:first-child) .slide__content > .block:first-child strong {
+  color: #483351;
+  font-weight: 600;
+}
+.slide:not(:first-child) .slide__content > .block:nth-child(2):has(h1) {
+  height: calc(var(--mypre-unit) * 56);
+  margin-bottom: calc(var(--mypre-unit) * 32 * var(--mypre-gap-scale));
+}
+li {
+  margin: calc(var(--mypre-unit) * 18 * var(--mypre-gap-scale)) 0;
+}
+p.statement { line-height: var(--mypre-leading); }
+/* A plain paragraph right after a key question says where the talk answers it:
+   same size as body text, quieter colour. */
+.slide__content > .block:has(> p.statement) + .block:not(:has(> p.statement)) > p { color: #706b75; }
+/* Keep that note close to its own question, so each question reads as one group.
+   The negative top margin collapses with the question's bottom margin. */
+.slide__content > .block:has(> p.statement) + .block:not(:has(> p.statement)) {
+  margin-top: calc(var(--mypre-gap-block) * var(--mypre-gap-scale) * -0.7);
+}
+figure.figure img { border-radius: 0; }
+.slide:has(img[src$=".png"]) {
+  --mypre-image-height: calc(var(--mypre-unit) * 408);
+}
+
+/* Restrained evidence tables, matching the awards palette and open row rules. */
+.slide table {
+  font-size: calc(var(--mypre-unit) * 24);
+  line-height: var(--mypre-leading);
+}
+.slide th, .slide td {
+  border: 0;
+  border-bottom: 1px solid #eeebf0;
+  padding: calc(var(--mypre-unit) * 10 * var(--mypre-gap-scale))
+    calc(var(--mypre-unit) * 12);
+}
+.slide th {
+  background: transparent;
+  color: var(--mypre-accent);
+}
+.slide th:first-child, .slide td:first-child { padding-left: 0; }
+.slide tbody tr:last-child td { border-bottom: 0; }
+
+/* Typographic cover: no progress band or navigation. */
+.slide:first-child::before, .slide:first-child::after { content: none; }
+.slide:first-child { background-image: none; }
+.slide:first-child .slide__content { padding-top: calc(var(--mypre-unit) * 125); }
+.slide:first-child h1 { font-size: calc(var(--mypre-unit) * 52.8); }
+.slide:first-child p.statement { font-size: calc(var(--mypre-unit) * 29); }
+
+body.mode-review .slide:has(figure) {
+  --mypre-image-height: calc(var(--mypre-unit) * 306);
+}
+body.mode-review .slide:has(img[src$=".png"]) {
+  --mypre-image-height: calc(var(--mypre-unit) * 382.5);
+}
+/* Step figures: as large as each page allows (step 1's figure has its own step;
+   step 2's shares the screen with the LP; step 3's with three short lines). */
+.slide:has(img[src$="leap-step1.svg"]),
+body.mode-review .slide:has(img[src$="leap-step1.svg"]) {
+  --mypre-image-height: calc(var(--mypre-unit) * 380);
+}
+/* Step 2's figure opens large on its own, shrinks to make room for the LP in the
+   next step, and is hidden from the footprint formula on. The runtime sets
+   data-step-current on stepped slides, also while measuring each step. */
+.slide:has(img[src$="leap-step2.svg"]),
+body.mode-review .slide:has(img[src$="leap-step2.svg"]) {
+  --mypre-image-height: calc(var(--mypre-unit) * 430);
+}
+.slide[data-step-current="2"]:has(img[src$="leap-step2.svg"]),
+body.mode-review .slide[data-step-current="2"]:has(img[src$="leap-step2.svg"]) {
+  --mypre-image-height: calc(var(--mypre-unit) * 220);
+}
+.slide[data-step-current]:not([data-step-current="1"]):not([data-step-current="2"])
+  .block:has(img[src$="leap-step2.svg"]) { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  figure.figure img[src$="leap-step2.svg"] { transition: max-height 400ms ease; }
+}
+.slide:has(img[src$="leap-step3.svg"]),
+body.mode-review .slide:has(img[src$="leap-step3.svg"]) {
+  --mypre-image-height: calc(var(--mypre-unit) * 330);
+}
+/* Footprint figures share step 1 of their page with one sentence. */
+.slide:has(img[src*="leap-footprint"]),
+body.mode-review .slide:has(img[src*="leap-footprint"]) {
+  --mypre-image-height: calc(var(--mypre-unit) * 400);
+}
+/* The guarantee summary is the only figure on its page. */
+.slide:has(img[src$="leap-guarantees.svg"]),
+body.mode-review .slide:has(img[src$="leap-guarantees.svg"]) {
+  --mypre-image-height: calc(var(--mypre-unit) * 450);
+}
+/* The LEAP overview is the only figure on its page: let it use the full width
+   in both modes (placed after the review caps so it is not shrunk there). */
+.slide:has(img[src$="leap-overview.svg"]),
+body.mode-review .slide:has(img[src$="leap-overview.svg"]) {
+  --mypre-image-height: calc(var(--mypre-unit) * 470);
+}
+
+/* BEGIN LEAP NAVIGATION VARIANT */
+/* Selected: footer */
+/* Minimal footer: the authored current phase on the left, contact on the right. */
+.slide::before, .slide::after { content: none; }
+.slide:not(:first-child) {
+  background-image:
+    linear-gradient(var(--mypre-accent), var(--mypre-accent)),
+    linear-gradient(var(--mypre-accent), var(--mypre-accent));
+  background-size:
+    var(--mypre-accent-width) var(--mypre-accent-height),
+    calc(100% - var(--mypre-slide-padding-x) * 2) var(--mypre-accent-height);
+  background-position:
+    left var(--mypre-slide-padding-x) top var(--mypre-accent-y),
+    left var(--mypre-slide-padding-x) bottom calc(var(--mypre-unit) * 48);
+}
+
+.slide:not(:first-child) .slide__content > .block:first-child p {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: calc(var(--mypre-unit) * 24);
+  left: var(--mypre-slide-padding-x);
+  right: var(--mypre-slide-padding-x);
+  bottom: calc(var(--mypre-unit) * 16);
+  transform: none;
+  height: calc(var(--mypre-unit) * 20.8);
+  padding: 0;
+  white-space: nowrap;
+  font-size: calc(var(--mypre-unit) * 16);
+  line-height: 1.3;
+}
+.slide:not(:first-child) .slide__content > .block:first-child p > em {
+  display: none;
+}
+.slide:not(:first-child) .slide__content > .block:first-child p > strong {
+  color: #633475;
+  font-weight: 600;
+  text-align: left;
+}
+.slide:not(:first-child) .slide__content > .block:first-child p::after {
+  content: "hehy@lamda.nju.edu.cn";
+  color: #706b75;
+  font-size: calc(var(--mypre-unit) * 14);
+  font-weight: 400;
+  white-space: nowrap;
+}
+/* END LEAP NAVIGATION VARIANT */

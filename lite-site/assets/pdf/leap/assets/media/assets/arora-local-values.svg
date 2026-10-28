@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1135" height="270" viewBox="0 0 1135 270" role="img" aria-labelledby="title">
+  <title id="title">Arora et al.: guess the labels of a small sample, estimate every local value, solve the linear program and round, keeping the best guess</title>
+  <rect width="1135" height="270" fill="white"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <!-- panel 1: sample and guess -->
+    <g stroke="#6b7280" stroke-width="3" fill="none">
+      <line x1="90" y1="62" x2="180" y2="42"/>
+      <line x1="180" y1="42" x2="275" y2="82"/>
+      <line x1="90" y1="62" x2="115" y2="142"/>
+      <line x1="180" y1="42" x2="220" y2="132"/>
+      <line x1="115" y1="142" x2="220" y2="132"/>
+      <line x1="275" y1="82" x2="220" y2="132"/>
+    </g>
+    <g fill="#ffffff" stroke="#6b7280" stroke-width="3">
+      <circle cx="90" cy="62" r="17"/>
+      <circle cx="275" cy="82" r="17"/>
+      <circle cx="115" cy="142" r="17"/>
+    </g>
+    <g fill="#633475" stroke="#633475" stroke-width="3">
+      <circle cx="180" cy="42" r="17"/>
+      <circle cx="220" cy="132" r="17"/>
+    </g>
+
+    <!-- panel 2: estimate the local values -->
+    <g stroke="#6b7280" stroke-width="3" fill="none">
+      <line x1="420" y1="62" x2="510" y2="42"/>
+      <line x1="510" y1="42" x2="605" y2="82"/>
+      <line x1="420" y1="62" x2="445" y2="142"/>
+      <line x1="510" y1="42" x2="550" y2="132"/>
+      <line x1="445" y1="142" x2="550" y2="132"/>
+      <line x1="605" y1="82" x2="550" y2="132"/>
+    </g>
+    <g stroke="#633475" stroke-width="5">
+      <line x1="420" y1="62" x2="510" y2="42"/>
+      <line x1="420" y1="62" x2="445" y2="142"/>
+    </g>
+    <g fill="#ffffff" stroke="#6b7280" stroke-width="3">
+      <circle cx="510" cy="42" r="17"/>
+      <circle cx="605" cy="82" r="17"/>
+      <circle cx="445" cy="142" r="17"/>
+      <circle cx="550" cy="132" r="17"/>
+    </g>
+    <circle cx="420" cy="62" r="17" fill="#ffffff" stroke="#633475" stroke-width="3"/>
+    <circle cx="420" cy="62" r="32" fill="none" stroke="#633475" stroke-width="2" stroke-dasharray="5 5"/>
+
+    <!-- panel 3: linear program, then rounding -->
+    <rect x="760" y="48" width="160" height="80" rx="10" fill="#edf4fb" stroke="#bccddd" stroke-width="2"/>
+    <text x="840" y="85" text-anchor="middle" font-size="26" fill="#123f70">LP</text>
+    <text x="840" y="111" text-anchor="middle" font-size="15" fill="#263342">on the estimates</text>
+    <line x1="928" y1="88" x2="966" y2="88" stroke="#1d4e89" stroke-width="3"/>
+    <path d="M958 82 L968 88 L958 94" fill="none" stroke="#1d4e89" stroke-width="3"/>
+    <rect x="975" y="48" width="140" height="80" rx="10" fill="#edf4fb" stroke="#bccddd" stroke-width="2"/>
+    <text x="1045" y="85" text-anchor="middle" font-size="26" fill="#123f70">Round</text>
+    <text x="1045" y="111" text-anchor="middle" font-size="15" fill="#263342">integral</text>
+
+    <!-- captions -->
+    <text x="182" y="226" text-anchor="middle" font-size="21" fill="#263342">guess a few labels</text>
+    <text x="512" y="226" text-anchor="middle" font-size="21" fill="#263342">estimate every local value</text>
+    <text x="938" y="226" text-anchor="middle" font-size="21" fill="#263342">keep the best guess</text>
+  </g>
+</svg>
