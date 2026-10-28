@@ -1,0 +1,200 @@
+/*
+ * Presenter window styles.
+ *
+ * Deliberately independent of `deck.css` and of the presentation's own
+ * `project.css`: this is a control surface, not a slide. Preview cards host
+ * real deck iframes, and nothing here can leak into the compiled slides.
+ */
+
+:root {
+  color-scheme: dark;
+  --presenter-bg: #14171c;
+  --presenter-panel: #1c2027;
+  --presenter-line: #2b313b;
+  --presenter-ink: #eef1f5;
+  --presenter-muted: #9aa3b0;
+  --presenter-accent: #6ea8fe;
+  --presenter-ok: #5ad19a;
+  --presenter-warn: #f0b429;
+  --presenter-bad: #f2777a;
+  --presenter-radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--presenter-bg);
+  color: var(--presenter-ink);
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+body.presenter {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 10px;
+  padding: 10px;
+  overflow: hidden;
+}
+
+/* Hidden must beat the layout rules below (`.end` and `.notice` set display). */
+.presenter [hidden] { display: none !important; }
+
+button {
+  font: inherit;
+  color: var(--presenter-ink);
+  background: #232833;
+  border: 1px solid var(--presenter-line);
+  border-radius: 7px;
+  padding: 5px 11px;
+  cursor: pointer;
+}
+button:hover:not(:disabled) { border-color: var(--presenter-accent); color: var(--presenter-accent); }
+button:focus-visible { outline: 2px solid var(--presenter-accent); outline-offset: 1px; }
+button:disabled { opacity: 0.45; cursor: default; }
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 12px;
+  background: var(--presenter-panel);
+  border: 1px solid var(--presenter-line);
+  border-radius: var(--presenter-radius);
+}
+.bar__group { display: flex; align-items: center; gap: 7px; }
+.bar__group--timer { flex: 0 0 auto; }
+.bar__group--nav { flex: 0 0 auto; }
+
+.clock {
+  min-width: 5.4em;
+  font-size: 26px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.counter {
+  min-width: 4.6em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  color: var(--presenter-muted);
+}
+
+.status {
+  flex: 1 1 auto;
+  margin: 0;
+  min-width: 0;
+  text-align: center;
+  color: var(--presenter-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.status::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--presenter-warn);
+  vertical-align: baseline;
+}
+[data-presenter-connection="connected"] .status { color: var(--presenter-ok); }
+[data-presenter-connection="connected"] .status::before { background: var(--presenter-ok); }
+[data-presenter-connection="disconnected"] .status { color: var(--presenter-bad); }
+[data-presenter-connection="disconnected"] .status::before { background: var(--presenter-bad); }
+[data-presenter-connection="standalone"] .status { color: var(--presenter-warn); }
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, 2.1fr) minmax(0, 1fr);
+  align-items: start;
+  align-content: center;
+  gap: 14px;
+  min-height: 0;
+}
+
+.card { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.card__heading {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--presenter-muted);
+}
+.card__label {
+  margin: 0;
+  min-height: 1.4em;
+  color: var(--presenter-muted);
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The frame is the deck's reference viewport; the whole frame is scaled, so
+   the preview keeps real type sizes and layout instead of reflowing. */
+.viewport {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1512 / 850;
+  background: #fff;
+  border: 1px solid var(--presenter-line);
+  border-radius: var(--presenter-radius);
+}
+.viewport iframe {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 1512px;
+  height: 850px;
+  border: 0;
+  background: #fff;
+  transform-origin: top left;
+  /* The preview is a read-only picture of the deck. Without this a click would
+     move keyboard focus into the frame, where the deck ignores the arrow keys,
+     and the presenter would stop responding to the keyboard. */
+  pointer-events: none;
+}
+.card--current .viewport { box-shadow: 0 12px 32px rgba(0, 0, 0, 0.42); }
+
+.end {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  color: var(--presenter-muted);
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: repeating-linear-gradient(45deg, #171b21, #171b21 12px, #1b2027 12px, #1b2027 24px);
+}
+
+.notice {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(560px, 88vw);
+  height: fit-content;
+  padding: 22px 26px;
+  background: var(--presenter-panel);
+  border: 1px solid var(--presenter-line);
+  border-radius: 14px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+}
+.notice h2 { margin: 0 0 8px; font-size: 17px; }
+.notice p { margin: 0 0 6px; color: var(--presenter-muted); }
+.notice b { color: var(--presenter-ink); }
+
+/* Narrow windows stack the previews instead of shrinking them into illegibility. */
+@media (max-width: 900px) {
+  .stage { grid-template-columns: minmax(0, 1fr); }
+  .bar { flex-wrap: wrap; }
+  .status { order: 3; flex-basis: 100%; }
+}

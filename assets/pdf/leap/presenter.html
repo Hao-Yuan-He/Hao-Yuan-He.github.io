@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="mypre 0.1.0">
+<title>Presenter · Learning-Augmented Smooth Integer Programs with PAC-Learnable Oracles</title>
+<link rel="stylesheet" href="assets/mypre/presenter.css">
+</head>
+<body class="presenter" data-presenter-connection="connecting">
+<header class="bar">
+  <div class="bar__group bar__group--timer">
+    <span class="clock" data-presenter-clock aria-label="Elapsed time" role="timer">00:00</span>
+    <button type="button" data-presenter-start aria-pressed="false">Start</button>
+    <button type="button" data-presenter-pause aria-pressed="true">Pause</button>
+    <button type="button" data-presenter-reset>Reset</button>
+  </div>
+  <p class="status" data-presenter-status role="status" aria-live="polite">Connecting to the audience window…</p>
+  <div class="bar__group bar__group--nav">
+    <button type="button" data-presenter-prev aria-label="Previous slide" disabled>Prev</button>
+    <span class="counter" data-presenter-counter aria-live="polite">– / –</span>
+    <button type="button" data-presenter-next aria-label="Next slide" disabled>Next</button>
+  </div>
+</header>
+<main class="stage">
+  <section class="card card--current" aria-labelledby="presenter-current-heading">
+    <h1 class="card__heading" id="presenter-current-heading">Current slide</h1>
+    <div class="viewport">
+      <iframe data-presenter-current-frame title="Current slide preview" scrolling="no" tabindex="-1"></iframe>
+    </div>
+    <p class="card__label" data-presenter-current-label></p>
+  </section>
+  <section class="card card--next" aria-labelledby="presenter-next-heading">
+    <h1 class="card__heading" id="presenter-next-heading">Next slide</h1>
+    <div class="viewport">
+      <iframe data-presenter-next-frame title="Next slide preview" scrolling="no" tabindex="-1"></iframe>
+      <p class="end" data-presenter-end hidden>End of deck</p>
+    </div>
+    <p class="card__label" data-presenter-next-label></p>
+  </section>
+</main>
+<aside class="notice" data-presenter-notice hidden>
+  <h2>No audience window</h2>
+  <p>This window previews a presentation and drives it, so it has to be opened from that presentation.</p>
+  <p>Go back to the presentation window and use <b>Presenter</b> (or press <b>P</b>).</p>
+</aside>
+<script src="assets/mypre/presenter.js"></script>
+</body>
+</html>
