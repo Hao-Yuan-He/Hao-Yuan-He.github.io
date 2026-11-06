@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hao-Yuan He 😄 | Short Bio</title>
-    <meta name="description" content="Short biography of Hao-Yuan He 😄." />
+    <title>Hao-Yuan He | Short Bio</title>
+    <meta name="description" content="Short biography of Hao-Yuan He." />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Hao-Yuan He 😄 | Short Bio" />
+    <meta property="og:title" content="Hao-Yuan He | Short Bio" />
     <meta property="og:description" content="Short biography of Hao-Yuan He." />
     <meta property="og:image" content="assets/img/profile.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Hao-Yuan He 😄 | Short Bio" />
+    <meta name="twitter:title" content="Hao-Yuan He | Short Bio" />
     <meta name="twitter:description" content="Short biography of Hao-Yuan He." />
     <meta name="twitter:image" content="assets/img/profile.png" />
     <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
@@ -21,51 +21,50 @@
       gtag("js", new Date());
       gtag("config", "G-93742XCGMS");
     </script>
-    <link rel="stylesheet" href="css/styles.css" />
+    <meta name="color-scheme" content="light" />
+    <link rel="stylesheet" href="css/styles.css?v=ffd7237e06" />
+    <script defer src="js/site.js?v=65d61a443a"></script>
   </head>
   <body>
+<!-- site-header:start -->
+    <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="container nav-row">
         <a href="index.html" class="brand">Hao-Yuan He</a>
-        <nav aria-label="Main navigation">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav class="site-nav" id="site-nav" aria-label="Main navigation">
           <ul class="nav-links">
-            <li><a href="short-bio.html">About</a></li>
-            <li><a href="news.html">News</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="short-bio.html" aria-current="page">About</a></li>
+            <li><a href="research.html">Research</a></li>
             <li><a href="full-publications.html">Publications</a></li>
           </ul>
         </nav>
       </div>
     </header>
-
-    <main>
-      <section id="bio" class="section">
-        <div class="container">
-          <div class="bio-box">
-            <h2>Short Bio</h2>
-            <p>
-              I earned my B.Sc. degree from the
-              <a href="https://cise.njtech.edu.cn/">School of Computer Science, Nanjing Tech University</a>.
-              In September 2021, I began my M.Sc. studies at Nanjing University,
-              and now I am continuing my Ph.D. studies, which start in September 2024.
-              I am always happy to potential collaborations or discussions.
-              Please feel free to contact me if you are interested.
-            </p>
-          </div>
+<!-- site-header:end -->
+    <main id="main" tabindex="-1">
+      <section class="container inner-page" aria-labelledby="bio-title">
+        <h1 id="bio-title">Short Bio</h1>
+        <div class="prose">
+          <p>I earned my B.Sc. degree from the <a href="https://cise.njtech.edu.cn/">School of Computer Science, Nanjing Tech University</a>. I began my M.Sc. studies at Nanjing University in September 2021 and entered the Ph.D. program in September 2024.</p>
+          <p>My research includes efficient inference for large language models and the interplay of learning and symbolic reasoning, including neuro-symbolic learning and learning-augmented optimization. I have also been a research intern at Huawei's 2012 Labs and Tencent AI Lab.</p>
+          <p>I welcome collaborations and discussions. Please feel free to <a href="mailto:hehy@lamda.nju.edu.cn">contact me</a> if you are interested. My <a href="assets/pdf/resume.pdf">CV (in Chinese)</a>.</p>
         </div>
       </section>
     </main>
-
+<!-- site-footer:start -->
     <footer class="site-footer">
       <div class="container footer-grid">
-        <small>© <span id="year"></span> Hao-Yuan He</small>
+        <small>© <span id="year">2026</span> Hao-Yuan He</small>
         <div class="footer-contact">
           <a href="mailto:hehy@lamda.nju.edu.cn">Email</a>
-          <span aria-hidden="true">·</span>
           <a href="https://github.com/Hao-Yuan-He">GitHub</a>
+          <a href="assets/pdf/resume.pdf">CV</a>
         </div>
       </div>
     </footer>
-
-    <script src="js/app.js"></script>
+<!-- site-footer:end -->
+    <script src="js/app.js?v=f9419f4d94"></script>
   </body>
 </html>

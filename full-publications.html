@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hao-Yuan He 😄 | Full Publications</title>
-    <meta name="description" content="Full publication list of Hao-Yuan He 😄, rendered from BibTeX." />
+    <title>Hao-Yuan He | Full Publications</title>
+    <meta name="description" content="Full publication list of Hao-Yuan He, rendered from BibTeX." />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Hao-Yuan He 😄 | Full Publications" />
+    <meta property="og:title" content="Hao-Yuan He | Full Publications" />
     <meta property="og:description" content="Full publication list rendered from BibTeX." />
     <meta property="og:image" content="assets/img/profile.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Hao-Yuan He 😄 | Full Publications" />
+    <meta name="twitter:title" content="Hao-Yuan He | Full Publications" />
     <meta name="twitter:description" content="Full publication list rendered from BibTeX." />
     <meta name="twitter:image" content="assets/img/profile.png" />
     <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
@@ -21,49 +21,51 @@
       gtag("js", new Date());
       gtag("config", "G-93742XCGMS");
     </script>
-    <link rel="stylesheet" href="css/styles.css" />
+    <meta name="color-scheme" content="light" />
+    <link rel="stylesheet" href="vendor/katex-0.19.1/katex.min.css" />
+    <link rel="stylesheet" href="css/styles.css?v=ffd7237e06" />
+    <script defer src="js/site.js?v=65d61a443a"></script>
   </head>
   <body data-publications="all">
+<!-- site-header:start -->
+    <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="container nav-row">
         <a href="index.html" class="brand">Hao-Yuan He</a>
-        <nav aria-label="Main navigation">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav class="site-nav" id="site-nav" aria-label="Main navigation">
           <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
             <li><a href="short-bio.html">About</a></li>
-            <li><a href="news.html">News</a></li>
-            <li><a href="full-publications.html">Publications</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="full-publications.html" aria-current="page">Publications</a></li>
           </ul>
         </nav>
       </div>
     </header>
-
-    <main>
-      <section id="publications" class="section">
-        <div class="container">
-          <div class="section-head">
-            <h2>Full Publications</h2>
-            <a class="inline-link" href="index.html#publications">View selected list</a>
-          </div>
-          <p class="muted pub-legend">
-            Ref tags: <strong>C</strong> = conference, <strong>J</strong> = journal, <strong>P</strong> = preprint; numbers indicate order within each category.
-          </p>
-          <div id="pub-status" class="muted">Loading publications...</div>
-          <div id="pub-list" class="pub-list" aria-live="polite"></div>
-        </div>
+<!-- site-header:end -->
+    <main id="main" tabindex="-1">
+      <section id="publications" class="container inner-page" aria-labelledby="publications-title">
+        <div class="page-title-row"><h1 id="publications-title">Full Publications</h1><a href="index.html#publications">Selected list</a></div>
+        <p class="pub-legend">C: conference · J: journal · P: preprint. Numbers indicate order within each category.</p>
+        <p id="pub-status" role="status">Loading publications…</p>
+        <div id="pub-list" class="pub-list" aria-live="polite"></div>
       </section>
     </main>
-
+<!-- site-footer:start -->
     <footer class="site-footer">
       <div class="container footer-grid">
-        <small>© <span id="year"></span> Hao-Yuan He</small>
+        <small>© <span id="year">2026</span> Hao-Yuan He</small>
         <div class="footer-contact">
           <a href="mailto:hehy@lamda.nju.edu.cn">Email</a>
-          <span aria-hidden="true">·</span>
           <a href="https://github.com/Hao-Yuan-He">GitHub</a>
+          <a href="assets/pdf/resume.pdf">CV</a>
         </div>
       </div>
     </footer>
-
-    <script src="js/app.js"></script>
+<!-- site-footer:end -->
+    <script defer src="vendor/katex-0.19.1/katex.min.js"></script>
+    <script defer src="vendor/katex-0.19.1/contrib/auto-render.min.js"></script>
+    <script defer src="js/app.js?v=f9419f4d94"></script>
   </body>
 </html>

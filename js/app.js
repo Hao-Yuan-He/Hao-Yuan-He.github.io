@@ -158,6 +158,8 @@ function buildActionItems(entry) {
 
   const code = entry.code || "";
   if (code) actions.push({ kind: "link", label: "CODE", href: code });
+  if (entry.project) actions.push({ kind: "link", label: "PAGE", href: entry.project });
+  if (entry.models) actions.push({ kind: "link", label: "MODELS", href: entry.models });
 
   const supp = resolveAssetUrl(entry.supp, "pdf");
   if (supp) actions.push({ kind: "link", label: "SUPP", href: supp });
@@ -166,7 +168,10 @@ function buildActionItems(entry) {
   else if (entry.eprint && /arxiv/i.test(entry.archiveprefix || "")) {
     actions.push({ kind: "link", label: "ARXIV", href: `https://arxiv.org/abs/${entry.eprint}` });
   }
-  const order = ["ABS", "BIB", "PDF", "ARXIV", "CODE", "SLIDES", "POSTER", "SUPP"];
+  else if (entry.earlier_arxiv) {
+    actions.push({ kind: "link", label: "ARXIV", href: `https://arxiv.org/abs/${entry.earlier_arxiv}` });
+  }
+  const order = ["ABS", "BIB", "PDF", "ARXIV", "PAGE", "CODE", "MODELS", "SLIDES", "POSTER", "SUPP"];
   actions.sort((a, b) => order.indexOf(a.label) - order.indexOf(b.label));
   return actions;
 }
@@ -204,6 +209,7 @@ function getMinimalBibTeX(entry) {
     ["publisher", entry.publisher],
     ["doi", entry.doi],
     ["arxiv", entry.arxiv || entry.eprint],
+    ["note", entry.note],
     ["url", entry.url],
   ].filter(([, value]) => normalizeSpace(value));
 
@@ -274,10 +280,13 @@ function renderNews(items) {
 
   sortNews(items).forEach((item) => {
     const li = document.createElement("li");
-    const strong = document.createElement("strong");
-    strong.textContent = `${normalizeSpace(item.date || "")}:`;
-    li.appendChild(strong);
-    li.appendChild(document.createTextNode(` ${normalizeSpace(item.content || "")}`));
+    const date = document.createElement("time");
+    date.className = "news-date";
+    date.dateTime = normalizeSpace(item.date || "");
+    date.textContent = date.dateTime;
+    const content = document.createElement("span");
+    content.textContent = normalizeSpace(item.content || "");
+    li.append(date, content);
     newsListEl.appendChild(li);
   });
 }
@@ -303,14 +312,14 @@ function classifyEntry(entry) {
 function scrollToHashIfPresent() {
   const hash = window.location.hash || "";
   if (!hash.startsWith("#pub-")) return;
-  const el = document.querySelector(hash);
+  const el = document.getElementById(hash.slice(1));
   if (el) {
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    el.scrollIntoView({ behavior: "instant", block: "start" });
   }
 }
 
 function createPublicationNode(entry, tagMap) {
-  const node = document.createElement("div");
+  const node = document.createElement("article");
   node.className = "pub-item";
   node.id = pubAnchorId(entry.key);
 
@@ -330,8 +339,7 @@ function createPublicationNode(entry, tagMap) {
   }
 
   const actionRow = document.createElement("div");
-  actionRow.className = "pub-actions";
-  if (publicationMode === "all") actionRow.classList.add("open");
+  actionRow.className = "pub-actions open";
 
   buildActionItems(entry).forEach((item) => {
     if (item.kind === "button") {
@@ -340,6 +348,8 @@ function createPublicationNode(entry, tagMap) {
       btn.type = "button";
       btn.dataset.action = item.action;
       btn.textContent = item.label;
+      btn.setAttribute("aria-expanded", "false");
+      btn.setAttribute("aria-controls", `${node.id}-${item.action === "toggle-abs" ? "abs" : "bib"}`);
       actionRow.appendChild(btn);
     } else {
       const a = document.createElement("a");
@@ -371,8 +381,33 @@ function createPublicationNode(entry, tagMap) {
 
   const authorLineEl = document.createElement("div");
   authorLineEl.className = "pub-line pub-authors";
-  const authorLine = formatAuthorLine(parseAuthors(entry.author || ""));
-  authorLineEl.textContent = authorLine;
+  const authors = parseAuthors(entry.author || "");
+  const equalContributors = new Set(parseAuthors(entry.equal_contrib || "").map((author) => formatAuthorLine([author])));
+  const contributionNote = equalContributors.size ? `${formatAuthorLine(parseAuthors(entry.equal_contrib))} contributed equally.` : "";
+  authors.forEach((author, index) => {
+    if (index > 0) {
+      const separator = index === authors.length - 1 ? (authors.length === 2 ? " and " : ", and ") : ", ";
+      authorLineEl.appendChild(document.createTextNode(separator));
+    }
+    const name = formatAuthorLine([author]);
+    const authorEl = document.createElement("span");
+    authorEl.textContent = name;
+    if (equalContributors.has(name)) {
+      authorEl.className = "pub-equal-author";
+      const marker = document.createElement("sup");
+      marker.className = "equal-contribution";
+      marker.title = contributionNote;
+      const symbol = document.createElement("span");
+      symbol.textContent = "*";
+      symbol.setAttribute("aria-hidden", "true");
+      const description = document.createElement("span");
+      description.className = "sr-only";
+      description.textContent = " (equal contribution)";
+      marker.append(symbol, description);
+      authorEl.appendChild(marker);
+    }
+    authorLineEl.appendChild(authorEl);
+  });
 
   const venueLineEl = document.createElement("div");
   venueLineEl.className = "pub-line pub-venue";
@@ -385,13 +420,29 @@ function createPublicationNode(entry, tagMap) {
   if (entry.abstract) {
     const abs = document.createElement("p");
     abs.className = "pub-abstract";
+    abs.id = `${node.id}-abs`;
     abs.textContent = normalizeSpace(entry.abstract);
+    // Keep source text safe, then typeset only the abstract (never the BibTeX).
+    if (typeof renderMathInElement === "function") {
+      renderMathInElement(abs, {
+        delimiters: [
+          { left: "$$", right: "$$", display: true },
+          { left: "$", right: "$", display: false },
+          { left: "\\(", right: "\\)", display: false },
+          { left: "\\[", right: "\\]", display: true },
+        ],
+        macros: { "\\varvec": "\\boldsymbol{#1}" },
+        throwOnError: false,
+        trust: false,
+      });
+    }
     abs.hidden = true;
     detail.appendChild(abs);
   }
 
   const bibWrap = document.createElement("div");
   bibWrap.className = "pub-bib-wrap";
+  bibWrap.id = `${node.id}-bib`;
   bibWrap.hidden = true;
 
   const bibPanel = document.createElement("div");
@@ -421,6 +472,12 @@ function createPublicationNode(entry, tagMap) {
   node.appendChild(titleEl);
   node.appendChild(authorLineEl);
   node.appendChild(venueLineEl);
+  if (entry.note && publicationMode === "all" && normalizeSpace(entry.note) !== contributionNote) {
+    const noteEl = document.createElement("div");
+    noteEl.className = "pub-line pub-venue";
+    noteEl.textContent = normalizeSpace(entry.note);
+    node.appendChild(noteEl);
+  }
   if (actionRow.childNodes.length) node.appendChild(actionRow);
   node.appendChild(detail);
   return node;
@@ -433,6 +490,15 @@ function renderPublications() {
   const visible = sortEntries(publications).filter((entry) => {
     return publicationMode === "all" ? true : isSelected(entry);
   });
+
+  if (publicationMode !== "all") {
+    visible.sort((a, b) => (Number(a.featured_order) || 999) - (Number(b.featured_order) || 999));
+    visible.forEach((entry) => pubListEl.appendChild(createPublicationNode(entry, tagMap)));
+    pubStatusEl.textContent = "";
+    pubStatusEl.hidden = true;
+    scrollToHashIfPresent();
+    return;
+  }
 
   const groups = {
     preprints: { title: "Preprints", entries: [] },
@@ -451,7 +517,7 @@ function renderPublications() {
     const section = document.createElement("section");
     section.className = "pub-group";
 
-    const heading = document.createElement("h3");
+    const heading = document.createElement("h2");
     heading.className = "pub-group-title";
     heading.textContent = group.title;
     section.appendChild(heading);
@@ -480,36 +546,7 @@ function updateIntroRefTags(tagMap) {
   });
 }
 
-function initResearchToggle() {
-  const panel = document.querySelector(".research-panel");
-  if (!panel) return;
-
-  const btn = panel.querySelector("[data-action='toggle-research-detail']");
-  const detail = panel.querySelector(".research-detail");
-  const label = btn ? btn.querySelector(".research-expand-label") : null;
-  if (!(btn instanceof HTMLButtonElement) || !(detail instanceof HTMLElement)) return;
-
-  btn.addEventListener("click", () => {
-    const willOpen = detail.hidden;
-    detail.hidden = !willOpen;
-    btn.setAttribute("aria-expanded", String(willOpen));
-    btn.classList.toggle("is-open", willOpen);
-    if (label) label.textContent = willOpen ? "Hide details" : "Show more";
-  });
-}
-
 if (pubListEl) {
-pubListEl.addEventListener("click", (event) => {
-  const target = event.target;
-  if (!(target instanceof HTMLElement)) return;
-  if (target.closest(".pub-btn, a, .pub-detail")) return;
-
-  const item = target.closest(".pub-item");
-  if (!item) return;
-  const actions = item.querySelector(".pub-actions");
-  if (actions) actions.classList.toggle("open");
-});
-
 pubListEl.addEventListener("click", (event) => {
   const target = event.target;
   if (!(target instanceof HTMLElement)) return;
@@ -532,6 +569,9 @@ pubListEl.addEventListener("click", (event) => {
       abs.hidden = !willOpen;
       if (bibWrap) bibWrap.hidden = true;
       detail.classList.toggle("open", willOpen);
+      item.querySelectorAll("[aria-expanded]").forEach((button) => {
+        button.setAttribute("aria-expanded", String(button === target && willOpen));
+      });
       return;
     }
 
@@ -541,6 +581,9 @@ pubListEl.addEventListener("click", (event) => {
       bibWrap.hidden = !willOpen;
       if (abs) abs.hidden = true;
       detail.classList.toggle("open", willOpen);
+      item.querySelectorAll("[aria-expanded]").forEach((button) => {
+        button.setAttribute("aria-expanded", String(button === target && willOpen));
+      });
       return;
     }
 
@@ -558,22 +601,25 @@ pubListEl.addEventListener("click", (event) => {
 }
 
 async function initPublications() {
-  if (!pubListEl || !pubStatusEl) return;
+  const hasPublicationList = Boolean(pubListEl && pubStatusEl);
+  if (!hasPublicationList && !document.querySelector("[data-ref-key]")) return;
   try {
-    const res = await fetch("data/papers.bib");
+    const res = await fetch("data/papers.bib", { cache: "no-cache" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const bibText = await res.text();
     publications = parseBibTeX(bibText);
 
     if (!publications.length) {
-      pubStatusEl.textContent = "No publications parsed from BibTeX.";
+      if (pubStatusEl) pubStatusEl.textContent = "No publications parsed from BibTeX.";
       return;
     }
 
-    renderPublications();
+    if (hasPublicationList) renderPublications();
+    else updateIntroRefTags(buildTagMap(publications));
   } catch (err) {
-    pubStatusEl.textContent = `Failed to load BibTeX: ${err.message}`;
+    if (pubStatusEl) pubStatusEl.textContent = `Failed to load BibTeX: ${err.message}`;
+    else console.warn("Failed to load research references.", err);
   }
 }
 
@@ -617,4 +663,3 @@ async function initNews() {
 
 initPublications();
 initNews();
-initResearchToggle();

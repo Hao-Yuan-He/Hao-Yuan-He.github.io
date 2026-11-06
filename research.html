@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hao-Yuan He | Research</title>
+    <meta name="description" content="Research of Hao-Yuan He in neuro-symbolic learning, learning-augmented optimization, and AI infrastructure." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Hao-Yuan He | Research" />
+    <meta property="og:description" content="Research of Hao-Yuan He in neuro-symbolic learning, learning-augmented optimization, and AI infrastructure." />
+    <meta property="og:image" content="assets/img/profile.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Hao-Yuan He | Research" />
+    <meta name="twitter:description" content="Research of Hao-Yuan He in neuro-symbolic learning, learning-augmented optimization, and AI infrastructure." />
+    <meta name="twitter:image" content="assets/img/profile.png" />
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-93742XCGMS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-93742XCGMS");
+    </script>
+    <meta name="color-scheme" content="light" />
+    <link rel="stylesheet" href="css/styles.css?v=ffd7237e06" />
+    <script defer src="js/site.js?v=65d61a443a"></script>
+  </head>
+  <body>
+<!-- site-header:start -->
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container nav-row">
+        <a href="index.html" class="brand">Hao-Yuan He</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="short-bio.html">About</a></li>
+            <li><a href="research.html" aria-current="page">Research</a></li>
+            <li><a href="full-publications.html">Publications</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+<!-- site-header:end -->
+    <main id="main" tabindex="-1">
+      <section id="research" class="container inner-page" aria-labelledby="research-title">
+        <h1 id="research-title">Research</h1>
+        <div class="research research-page">
+          <article class="research-theme">
+            <h2>Learning and symbolic reasoning</h2>
+            <figure class="reasoning-diagram" data-reasoning-diagram aria-label="A mutually beneficial loop: learning models provide concepts and optimization guidance to symbolic reasoning; logical feedback improves learning.">
+              <div id="reasoning-loop" class="reasoning-loop">
+                <div class="diagram-node diagram-learning">
+                  <svg class="diagram-glyph" viewBox="0 0 64 34" aria-hidden="true" focusable="false">
+                    <g data-step="1"><path d="M8 7 32 7M8 7 32 17M8 7 32 27M8 17 32 7M8 17 32 17M8 17 32 27M8 27 32 7M8 27 32 17M8 27 32 27" /></g>
+                    <g data-step="3"><path d="M32 7 56 12M32 17 56 12M32 27 56 12M32 7 56 22M32 17 56 22M32 27 56 22" /></g>
+                    <g data-step="0"><circle cx="8" cy="7" r="3" /><circle cx="8" cy="17" r="3" /><circle cx="8" cy="27" r="3" /></g>
+                    <g data-step="2"><circle cx="32" cy="7" r="3" /><circle cx="32" cy="17" r="3" /><circle cx="32" cy="27" r="3" /></g>
+                    <g data-step="4"><circle cx="56" cy="12" r="3" /><circle cx="56" cy="22" r="3" /></g>
+                  </svg>
+                  <span>Learning model</span>
+                  <span class="diagram-benefit">Knowledge-guided learning</span>
+                  <span class="diagram-progress" aria-hidden="true"><i></i><i></i><i></i></span>
+                </div>
+                <div class="diagram-exchange">
+                  <span class="diagram-label diagram-label-forward">Concepts &amp; optimization guidance</span>
+                  <svg class="diagram-flow" viewBox="0 0 300 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                    <defs>
+                      <marker id="reasoning-arrowhead" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M1 1 L7 4 L1 7" fill="none" stroke="#8597a3" stroke-width="1.2" />
+                      </marker>
+                    </defs>
+                    <path class="diagram-route diagram-route-forward" d="M4 31 C90 5 210 5 296 31" marker-end="url(#reasoning-arrowhead)" />
+                    <path class="diagram-route diagram-route-backward" d="M296 69 C210 95 90 95 4 69" marker-end="url(#reasoning-arrowhead)" />
+                  </svg>
+                  <span class="diagram-label diagram-label-backward">Logical feedback</span>
+                </div>
+                <div class="diagram-node diagram-symbolic">
+                  <svg class="diagram-glyph" viewBox="0 0 64 34" aria-hidden="true" focusable="false">
+                    <g data-step="1"><path d="M10 28 18 17M26 28 18 17M40 28 46 17M54 28 46 17" /></g>
+                    <g data-step="3"><path d="M18 17 32 6M46 17 32 6" /></g>
+                    <g data-step="0"><rect x="7.5" y="25.5" width="5" height="5" /><rect x="23.5" y="25.5" width="5" height="5" /><rect x="37.5" y="25.5" width="5" height="5" /><rect x="51.5" y="25.5" width="5" height="5" /></g>
+                    <g data-step="2"><rect x="15.5" y="14.5" width="5" height="5" /><rect x="43.5" y="14.5" width="5" height="5" /></g>
+                    <g data-step="4"><rect x="29" y="3" width="6" height="6" /></g>
+                  </svg>
+                  <span>Symbolic reasoning</span>
+                  <span class="diagram-benefit">Learning-guided reasoning</span>
+                  <span class="diagram-progress" aria-hidden="true"><i></i><i></i><i></i></span>
+                </div>
+              </div>
+            </figure>
+            <div class="research-directions">
+              <section><h3>Learning → Reasoning</h3><p>Learned predictions can guide optimization. LEAP: learning-augmented approximation for integer programs, including MAX-k-SAT. <a class="ref-tag" data-ref-key="he2026learning" href="full-publications.html#pub-he2026learning">paper</a></p></section>
+              <section><h3>Reasoning → Learning</h3><p>Knowledge as supervision: when concepts are learnable <a class="ref-tag" data-ref-key="he2025AnalysisOnNeSy" href="full-publications.html#pub-he2025analysisonnesy">paper</a> and how to learn from multiple valid explanations. <a class="ref-tag" data-ref-key="he2024a3bl" href="full-publications.html#pub-he2024a3bl">paper</a></p></section>
+            </div>
+          </article>
+          <article id="ai-infra" class="research-theme infra-theme" aria-labelledby="ai-infra-title">
+            <h2 id="ai-infra-title">AI Infra</h2>
+            <ol class="infra-pipeline" aria-label="AI infrastructure directions, from kernels to systems and algorithms">
+              <li class="infra-stage">
+                <svg class="infra-glyph" viewBox="0 0 160 80" aria-hidden="true" focusable="false">
+                  <path class="infra-emphasis" d="m30 21-11 19 11 19m24-38 11 19-11 19m-7-40-12 42" />
+                  <path class="infra-line" d="M75 40h16m-4-4 4 4-4 4" />
+                  <rect class="infra-outline" x="102" y="14" width="48" height="52" rx="4" />
+                  <path class="infra-line" d="M114 8v6m12-6v6m12-6v6m-24 52v6m12-6v6m12-6v6M96 27h6m-6 13h6m-6 13h6m48-26h6m-6 13h6m-6 13h6" />
+                  <g class="infra-fill"><rect x="111" y="24" width="11" height="11" rx="1" /><rect x="130" y="24" width="11" height="11" rx="1" /><rect x="111" y="45" width="11" height="11" rx="1" /><rect x="130" y="45" width="11" height="11" rx="1" /></g>
+                </svg>
+                <svg class="infra-connector" viewBox="0 0 40 12" aria-hidden="true" focusable="false"><path d="M1 6h37m-5-4 5 4-5 4" /></svg>
+                <h3>Kernels</h3>
+                <p>Automatic generation and optimization of compute kernels.</p>
+              </li>
+              <li class="infra-stage">
+                <svg class="infra-glyph" viewBox="0 0 160 80" aria-hidden="true" focusable="false">
+                  <path class="infra-line" d="M10 19h140M10 40h140M10 61h140" />
+                  <g class="infra-outline"><rect x="12" y="12" width="30" height="14" rx="3" /><rect x="58" y="12" width="30" height="14" rx="3" /><rect x="104" y="12" width="30" height="14" rx="3" /></g>
+                  <g class="infra-fill"><rect x="32" y="33" width="30" height="14" rx="3" /><rect x="78" y="33" width="30" height="14" rx="3" /><rect x="52" y="54" width="30" height="14" rx="3" /><rect x="98" y="54" width="30" height="14" rx="3" /></g>
+                  <path class="infra-emphasis" d="m27 27 16 5m-4-4 4 4-6 1m4 15 16 5m-4-4 4 4-6 1" />
+                </svg>
+                <svg class="infra-connector" viewBox="0 0 40 12" aria-hidden="true" focusable="false"><path d="M1 6h37m-5-4 5 4-5 4" /></svg>
+                <h3>Systems</h3>
+                <p>Millrace: pipelined feature preparation and draft-model training. <a class="ref-tag" data-ref-key="shen2026millrace" href="full-publications.html#pub-shen2026millrace">paper</a></p>
+              </li>
+              <li class="infra-stage">
+                <svg class="infra-glyph" viewBox="0 0 160 80" aria-hidden="true" focusable="false">
+                  <g class="infra-outline">
+                    <rect x="15" y="13" width="26" height="24" rx="3" /><rect x="50" y="13" width="26" height="24" rx="3" />
+                    <rect x="85" y="13" width="26" height="24" rx="3" /><rect x="120" y="13" width="26" height="24" rx="3" />
+                  </g>
+                  <g class="infra-token-labels"><text x="28" y="29">x₁</text><text x="63" y="29">x₂</text><text x="98" y="29">x₃</text><text x="133" y="29">x₄</text></g>
+                  <path class="infra-line" d="M28 42v9m35-9v9m35-9v9m35-9v9M28 51h105M80 51v9" />
+                  <rect class="infra-fill" x="44" y="61" width="72" height="15" rx="3" />
+                  <path class="infra-emphasis" d="m74 68 4 4 8-8" />
+                </svg>
+                <h3>Algorithms</h3>
+                <p>LongSpark: fixed-cost parallel drafting for long-context speculative decoding. <a class="ref-tag" data-ref-key="he2026longspark" href="full-publications.html#pub-he2026longspark">paper</a></p>
+              </li>
+            </ol>
+          </article>
+        </div>
+      </section>
+    </main>
+<!-- site-footer:start -->
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <small>© <span id="year">2026</span> Hao-Yuan He</small>
+        <div class="footer-contact">
+          <a href="mailto:hehy@lamda.nju.edu.cn">Email</a>
+          <a href="https://github.com/Hao-Yuan-He">GitHub</a>
+          <a href="assets/pdf/resume.pdf">CV</a>
+        </div>
+      </div>
+    </footer>
+<!-- site-footer:end -->
+    <script src="js/app.js?v=f9419f4d94"></script>
+  </body>
+</html>

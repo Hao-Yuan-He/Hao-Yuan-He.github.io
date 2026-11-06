@@ -1,27 +1,77 @@
 ---
 ---
 
-@misc{he2026learning,
+@misc{he2026longspark,
+  abstract_source = {https://arxiv.org/abs/2609.37029v2},
   abbr          = {Preprint},
-  abstract      = {This paper develops learning-augmented algorithms for smooth integer programs, a broad class of Boolean polynomial optimization problems that captures canonical combinatorial optimization tasks such as MAX-CUT and MAX-k-SAT. We study an end-to-end setting in which a learned oracle predicts a full Boolean assignment for each instance. We introduce LEAP, an approximation pipeline that uses the prediction as a reference point for a linear surrogate of the objective, optimizes the surrogate by linear programming, and rounds the result to an integral solution. For objectives of fixed degree, LEAP queries the oracle once and runs in polynomial time. We establish two main guarantees. First, LEAP degrades gracefully with prediction errors. We bound its loss by an error footprint, the part of the decomposed objective that the errors can affect. For MAX-k-SAT with ε prediction errors, this yields an approximation ratio of 1−O(ε/n^γ) on near-dense instances whose optimum is Ω(n^(k−1+γ)). When each literal occurs in at most Δ clauses, the ratio is 1−O(Δε/n). Second, the oracle is learnable from sampled instances. We bound the pseudo-dimension of the cost class induced by LEAP, which gives a PAC-style guarantee for empirical risk minimization. Together, the two guarantees give an end-to-end bound that separates the loss of the best oracle in the class from the statistical error of learning. Experiments on MAX-CUT and MAX-SAT show that LEAP substantially reduces the loss of imperfect predictions and that empirical selection identifies useful oracle candidates.},
+  abstract      = {Speculative decoding accelerates autoregressive inference by verifying multiple draft tokens in a single target forward pass. However, as the context grows, existing state-of-the-art drafters become increasingly expensive, eroding the very efficiency advantage they are designed to provide. We argue that this scaling is unnecessary. A standalone language model must grow with its prefix because it is solely responsible for every token it produces. A drafter, by contrast, only proposes candidates; the target catches and corrects every error before any token is committed. The drafter's decoding cost can therefore be made entirely independent of the prefix length. We introduce LongSpark, a block-diffusion drafter that achieves this by extracting fixed-size, multiscale views from the target's verification pass, thereby eliminating the need for a growing persistent state. Extensive evaluations demonstrate that LongSpark achieves state-of-the-art end-to-end efficiency across multiple model scales and realistic serving conditions. Notably, it delivers the lowest time-per-output-token on long-context tasks while reducing the drafter's context state by several orders of magnitude.},
+  author        = {Hao-Yuan He and Peng-Fei Liu and Chen Chen and Si Shen and Quan He and Runzhou Liu and Xinqi Li and Zhenhua Dong and Ming Li},
+  equal_contrib = {Hao-Yuan He and Peng-Fei Liu},
+  title         = {LongSpark: Efficient Speculative Decoding with a Fixed-Cost Parallel Drafter},
+  year          = {2026},
+  eprint        = {2609.37029},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.LG},
+  pdf           = {https://arxiv.org/pdf/2609.37029},
+  url           = {https://arxiv.org/abs/2609.37029},
+  code          = {https://github.com/Hao-Yuan-He/LongSpark},
+  project       = {https://long-spark.github.io/},
+  models        = {https://huggingface.co/collections/Hehy/longspark},
+  note          = {Hao-Yuan He and Peng-Fei Liu contributed equally.},
+  selected      = {true},
+  featured_order = {1}
+}
+
+@misc{shen2026millrace,
+  abstract_source = {https://www.alphaxiv.org/abs/2611.millrace-pipelined-speculative-decoding-trainingv1},
+  abbr          = {Preprint},
+  abstract      = {Speculative decoding accelerates large language model inference by using a smaller draft model to propose tokens for the larger model to verify in parallel. Modern drafts learn from the larger model’s intermediate features, making their training cost depend on how these features are prepared and delivered. Storing all features for 250B tokens requires 7.68 PB with a 92B model, yet preparing them during training can leave trainers waiting for complete inputs. We present Millrace, a streaming system based on the observation that record selections and reuse can be known before expensive feature computation. Replaying the configured sampler ahead of execution exposes immediate demand and retention value while preserving its selections. This lets the system prepare features for upcoming inputs and retain frequently reused features in fast memory, reducing repeated reads and recomputation. An independent pool of high-bandwidth memory (HBM) Relay workers decouples shared features from producer buffers and delivers the required feature ranges into training inputs. Using this demand, Millrace chooses retention versus reconstruction, schedules contending operations jointly, and compares device partitions as training stages change. For Qwen3-8B, Millrace reduces the time spent on feature preparation and draft training by 40.5–57.6% across 8K–32K compared with the fastest baseline. A 4,432-step production run with a 92B feature producer demonstrates sustained draft training.},
+  author        = {Si Shen and Chen Chen and Hao-Yuan He and Jiajie Huang and Pengfei Liu and Tingxuan Han and Jiaqi Zheng and Runzhou Liu and Xinqi Li and Zhongzhe Hu and Zhenhua Dong and Guihai Chen},
+  title         = {Millrace: Efficient Pipelined Training for Speculative Decoding},
+  year          = {2026},
+  pdf           = {https://www.alphaxiv.org/abs/2611.millrace-pipelined-speculative-decoding-training.pdf},
+  url           = {https://www.alphaxiv.org/abs/2611.millrace-pipelined-speculative-decoding-training},
+  project       = {https://www.alphaxiv.org/abs/2611.millrace-pipelined-speculative-decoding-training},
+  selected      = {false}
+}
+
+@misc{he2026acr,
+  abstract_source = {https://arxiv.org/abs/2609.39561v1},
+  abbr          = {Preprint},
+  abstract      = {Abductive learning combines neural perception with symbolic reasoning, using explanations generated by abduction to supervise the perception model. Multiple valid explanations of the same symbolic target can assign conflicting labels to the same inputs. Common policies select a single candidate as a pseudo-label, which may reinforce mistaken assignments, or weight all candidates, which may spread supervision across competing labels. These risks motivate selecting a retained subset to balance supervision sharpness and model-mass coverage. To guide this choice, we bound the coordinate-level supervision error using retained uncertainty, discarded model mass, and model mismatch. For a fixed model and training pair, only the first two terms depend on the retained set. We propose Abductive Candidate Retention (ACR), which uses these terms to guide greedy additions, accepting a candidate when its recovered mass exceeds the increase in retained uncertainty. Experiments show that ACR improves concept accuracy over single-candidate baselines and A3BL in most evaluated aggregated mod-addition settings. Objective ablations support the joint use of uncertainty and posterior mass.},
+  author        = {Hao-Yuan He and Yu Liu and Ming Li},
+  title         = {Candidate Retention for Abductive Learning},
+  year          = {2026},
+  eprint        = {2609.39561},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.LG},
+  pdf           = {https://arxiv.org/pdf/2609.39561},
+  url           = {https://arxiv.org/abs/2609.39561},
+  selected      = {false}
+}
+
+@misc{he2026learning,
+  abstract_source = {assets/pdf/learning_augmented_optimization.pdf},
+  abbr          = {Preprint},
+  abstract      = {This paper develops learning-augmented algorithms for smooth integer programs, a broad class of Boolean polynomial optimization problems that captures canonical combinatorial optimization tasks such as MAX-CUT and MAX-$k$-SAT. We study an end-to-end setting in which a learned oracle predicts a full Boolean assignment for each instance. We introduce LEAP, an approximation pipeline that uses the prediction as a reference point for a linear surrogate of the objective, optimizes the surrogate by linear programming, and rounds the result to an integral solution. For objectives of fixed degree, LEAP queries the oracle once and runs in polynomial time. We establish two main guarantees. First, LEAP degrades gracefully with prediction errors. We bound its loss by an error footprint, the part of the decomposed objective that the errors can affect. For MAX-$k$-SAT with $\varepsilon$ prediction errors, this yields an approximation ratio of $1 - O(\varepsilon/n^\gamma)$ on near-dense instances whose optimum is $\Omega(n^{k-1+\gamma})$. When each literal occurs in at most $\Delta$ clauses, the ratio is $1 - O(\Delta\varepsilon/n)$. Second, the oracle is learnable from sampled instances. We bound the pseudo-dimension of the cost class induced by LEAP, which gives a PAC-style guarantee for empirical risk minimization. Together, the two guarantees give an end-to-end bound that separates the loss of the best oracle in the class from the statistical error of learning. Experiments on MAX-CUT and MAX-SAT show that LEAP substantially reduces the loss of imperfect predictions and that empirical selection identifies useful oracle candidates.},
   author        = {Hao-Yuan He and Jiang-Tian Xue and Ming Li},
   bibtex_show   = {false},
   pdf           = {learning_augmented_optimization.pdf},
   slides        = {leap/index.html},
   selected      = {true},
+  featured_order = {4},
   title         = {Learning-Augmented Smooth Integer Programs with PAC-Learnable Oracles},
   year          = {2026},
-  eprint        = {2602.02505},
-  archiveprefix = {arXiv},
-  primaryclass  = {cs.DS},
-  url           = {https://arxiv.org/abs/2602.02505}
+  earlier_arxiv = {2602.02505v1},
+  url           = {https://hao-yuan-he.github.io/assets/pdf/learning_augmented_optimization.pdf}
 }
 
 @inproceedings{he2025AnalysisOnNeSy,
+  abstract_source = {assets/pdf/AnalysisOnNeSy_neurips.pdf},
   abbr        = {NeurIPS},
-  abstract    = {This paper presents a comprehensive theoretical analysis of the learnability of neuro-symbolic (NeSy) tasks within hybrid systems. 
-                 We characterize the learnability of NeSy tasks by their derived constraint satisfaction problems (DCSPs), demonstrating that a task is learnable if and only if its corresponding DCSP admits a unique solution. 
-                 Under mild assumptions, we establish the sample complexity for learnable tasks and show that, for general tasks, the asymptotic expected concept error is controlled by the degree of disagreement among DCSP solutions. 
+  abstract    = {This paper presents a comprehensive theoretical analysis of the learnability of neuro-symbolic (NeSy) tasks within hybrid systems.
+                 We characterize the learnability of NeSy tasks by their derived constraint satisfaction problems (DCSPs), demonstrating that a task is learnable if and only if its corresponding DCSP admits a unique solution.
+                 Under mild assumptions, we establish the sample complexity for learnable tasks and show that, for general tasks, the asymptotic expected concept error is controlled by the degree of disagreement among DCSP solutions.
                  Our findings unify the characterization of learnability and the phenomenon of reasoning shortcuts, providing theoretical guarantees and actionable guidance for the principled design of NeSy systems.},
   address     = {San Diego, CA, USA},
   arxiv       = {2503.16797},
@@ -33,6 +83,7 @@
   pdf         = {AnalysisOnNeSy_neurips.pdf},
   poster      = {AnalysisOnNeSy_poster.pdf},
   selected    = {true},
+  featured_order = {2},
   pages       = {84923-84956},
   title       = {A Learnability Analysis on Neuro-Symbolic Learning},
   year        = {2025}
@@ -40,8 +91,9 @@
 
 
 @inproceedings{he2024a3bl,
+  abstract_source = {https://proceedings.mlr.press/v235/he24j.html},
   abbr        = {ICML},
-  abstract    = {Abductive Learning (ABL) is a promising framework for integrating sub-symbolic perception and logical reasoning through abduction. In this case, the abduction process provides supervision for the perception model from the background knowledge. Nevertheless, this process naturally contains uncertainty, since the knowledge base may be satisfied by numerous potential candidates. This implies that the result of the abduction process, i.e., a set of candidates, is ambiguous; both correct and incorrect candidates are mixed in this set. The prior art of abductive learning selects the candidate that has the minimal inconsistency of the knowledge base. However, this method overlooks the ambiguity in the abduction process and is prone to error when it fails to identify the correct candidates. To address this, we propose Ambiguity-Aware Abductive Learning (A3BL), which evaluates all potential candidates and their probabilities, thus preventing the model from falling into sub-optimal solutions. Both experimental results and theoretical analyses prove that A3BL markedly enhances ABL by efficiently exploiting the ambiguous abduced supervision.},
+  abstract      = {Abductive Learning (ABL) is a promising framework for integrating sub-symbolic perception and logical reasoning through abduction. In this case, the abduction process provides supervision for the perception model from the background knowledge. Nevertheless, this process naturally contains uncertainty, since the knowledge base may be satisfied by numerous potential candidates. This implies that the result of the abduction process, i.e., a set of candidates, is ambiguous; both correct and incorrect candidates are mixed in this set. The prior art of abductive learning selects the candidate that has the minimal inconsistency of the knowledge base. However, this method overlooks the ambiguity in the abduction process and is prone to error when it fails to identify the correct candidates. To address this, we propose Ambiguity-Aware Abductive Learning ($\textrm{A}^3\textrm{BL}$), which evaluates all potential candidates and their probabilities, thus preventing the model from falling into sub-optimal solutions. Both experimental results and theoretical analyses prove that $\textrm{A}^3\textrm{BL}$ markedly enhances ABL by efficiently exploiting the ambiguous abduced supervision.},
   address     = {Vienna, Austria},
   author      = {Hao-Yuan He and Hui Sun and Zheng Xie and Ming Li},
   bibtex_show = {true},
@@ -53,20 +105,15 @@
   poster      = {A3BL_Poster.pdf},
   publisher   = {PMLR},
   selected    = {true},
+  featured_order = {3},
   title       = {Ambiguity-Aware Abductive Learning},
   volume      = {235},
   year        = {2024}
 }
 @article{he2025piLR,
+  abstract_source = {https://link.springer.com/article/10.1007/s10994-024-06668-y},
   abbr        = {MLJ},
-  abstract    = {Label refinement methods are designed to improve the quality of training labels by incorporating model predictions into the original training labels.
-                 By adjusting the combination coefficient of the noisy label, the impact of noise is reduced, which in turn makes the training process more robust.
-                 However, previous label refinement methods are unable to model instance-dependent noise, which is the most realistic type of noise.
-                 To address this limitation, we propose a simple approach, probabilistic instance-dependent label refinement (denoted as $\pi$-LR).
-                 Inspired by the fact that humans are more likely to make mistakes when annotating confusing instances, we propose to estimate the probability of whether a sample is confusing, which can be beneficial for modeling noise generation.
-                 Our approach utilizes this concept by assigning a confusing probability $\eta_i$ to each instance $\boldsymbol{x}_i$ from a probabilistic perspective.
-                 This provides a clear understanding of how instance-dependent noise affects true labels.
-                 Empirical evaluations show that $\pi$-LR enhances the robustness of the model in the presence of label noise and outperforms all compared methods on both realistic and synthetic label noise datasets.},
+  abstract      = {Label refinement methods are designed to improve the quality of training labels by incorporating model predictions into the original training labels. By adjusting the combination coefficient of the noisy label, the impact of noise is reduced, which in turn makes the training process more robust. However, previous label refinement methods are unable to model instance-dependent noise, which is the most realistic type of noise. To address this limitation, we propose a simple approach, probabilistic instance-dependent label refinement (referred to as \(\pi\)-LR). Inspired by the fact that humans are more likely to make mistakes when annotating confusing instances, we propose to estimate the probability of whether a sample is confusing, which can be useful for modeling noise generation. Our approach exploits this concept by assigning a confusing probability \(\eta _i\) to each instance \(\varvec{x}_i\) from a probabilistic perspective. This provides a clear understanding of how instance-dependent noise affects true labels. Empirical evaluations show that \(\pi\)-LR improves the robustness of the model in the presence of label noise and outperforms all compared methods on both realistic and synthetic label noise, while maintaining high efficiency in time and space.},
   author      = {Hao-Yuan He and Yu Liu and Ren-Biao Liu and Zheng Xie and Ming Li},
   bibtex_show = {false},
   cat         = {Weakly Supervised Learning},
@@ -84,6 +131,7 @@
 }
 
 @article{he2024RILL,
+  abstract_source = {https://link.springer.com/article/10.1007/s10994-023-06436-4},
   abbr        = {MLJ},
   abstract    = {Integrating logical reasoning and machine learning by approximating logical inference with differentiable operators is a widely used technique in the field of Neuro-Symbolic Learning.
                  However, some differentiable operators could introduce significant biases during backpropagation, which can degrade the performance of Neuro-Symbolic systems.
@@ -101,6 +149,7 @@
   poster      = {rill_poster.pdf},
   publisher   = {Springer},
   selected    = {true},
+  featured_order = {5},
   slides      = {rill_oral.pptx},
   title       = {Reduced Implication-bias Logic Loss for Neuro-Symbolic Learning},
   volume      = {113},
@@ -108,6 +157,7 @@
 }
 
 @article{xie2024weakly,
+  abstract_source = {https://arxiv.org/abs/2305.14258},
   abbr        = {TPAMI},
   abstract    = {Since acquiring perfect supervision is usually difficult, real-world machine learning tasks often confront inaccurate, incomplete, or inexact supervision, collectively referred to as weak supervision. In this work, we present WSAUC, a unified framework for weakly supervised AUC optimization problems, which covers noisy label learning, positive-unlabeled learning, multi-instance learning, and semi-supervised learning scenarios. Within the WSAUC framework, we first frame the AUC optimization problems in various weakly supervised scenarios as a common formulation of minimizing the AUC risk on contaminated sets, and demonstrate that the empirical risk minimization problems are consistent with the true AUC. Then, we introduce a new type of partial AUC, specifically, the reversed partial AUC (rpAUC), which serves as a robust training objective for AUC maximization in the presence of contaminated labels. WSAUC offers a universal solution for AUC optimization in various weakly supervised scenarios by maximizing the empirical rpAUC. Theoretical and experimental results under multiple settings support the effectiveness of WSAUC on a range of weakly supervised AUC optimization tasks.},
   address     = {Los Alamitos, CA, USA},
@@ -129,17 +179,33 @@
 }
 
 
+@inproceedings{huang2026triabl,
+  abstract_source = {https://link.springer.com/chapter/10.1007/978-981-92-1462-4_31},
+  abstract      = {Abductive learning (ABL) unifies machine learning and logical reasoning in a mutually beneficial loop. During training, a central challenge is ambiguity: multiple hypotheses can satisfy the background knowledge. Existing ABL variants either select the single candidate closest to the model’s prediction, which cannot guarantee correctness, or consider all candidates via expectation maximization, but degrade when reasoning cannot get complete candidate sets within realistic time budgets. Tri-ABL addresses this by training three learners to maintain minimal, incomplete, yet distinct abduction sets from complementary perspectives, thereby avoiding exhaustive abduction. We aggregate these sets via a tri-learner ensemble to construct supervision that amplifies consistently supported hypotheses and suppresses spurious ones, stabilizing optimization and improving training efficiency under uncertainty. Across multiple benchmarks, Tri-ABL consistently outperforms prior ABL methods and achieves state-of-the-art performance.},
+  abbr      = {PAKDD},
+  author    = {Yan-Xiao Huang and Hao-Yuan He and Ming Li},
+  title     = {Tri-ABL: Enhancing ABL Using Three Learners},
+  booktitle = {Advances in Knowledge Discovery and Data Mining},
+  volume    = {16598},
+  pages     = {393-404},
+  year      = {2026},
+  doi       = {10.1007/978-981-92-1462-4_31},
+  pdf       = {https://doi.org/10.1007/978-981-92-1462-4_31},
+  selected  = {false}
+}
+
 @article{sun2026mitigating,
+  abstract_source = {https://arxiv.org/abs/2510.24044},
   author    = {Sun, Hui and Xie, Zheng and He, Hao-Yuan and Li, Ming},
   journal   = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
   abbr      = {TPAMI},
   title     = {Mitigating Negative Transfer via Reducing Environmental Disagreement},
   year      = {2026},
-  volume    = {},
-  abstract  = { Unsupervised Domain Adaptation (UDA) focuses on transferring knowledge from a labeled source domain to an unlabeled target domain, addressing the challenge of domain shift. Significant domain shifts hinder effective knowledge transfer, leading to negative transfer and deteriorating model performance. Therefore, mitigating negative transfer is essential. This study revisits negative transfer through the lens of causally disentangled learning, emphasizing cross-domain discriminative disagreement on non-causal environmental features as a critical factor. Our theoretical analysis reveals that overreliance on non-causal environmental features as the environment evolves can cause discriminative disagreements (termed environmental disagreement), thereby resulting in negative transfer. To address this, we propose Reducing Environmental Disagreement (RED), which disentangles each sample into domain-invariant causal features and domain-specific non-causal environmental features via adversarially training domain-specific environmental feature extractors in the opposite domains. Subsequently, RED estimates and reduces environmental disagreement based on domain specific non-causal environmental features. Experimental results confirm that RED effectively mitigates negative transfer and achieves state-of-the-art performance. },
-  number    = {01},
+  volume    = {48},
+  abstract  = { Unsupervised Domain Adaptation (UDA) focuses on transferring knowledge from a labeled source domain to an unlabeled target domain, addressing the challenge of domain shift. Significant domain shifts hinder effective knowledge transfer, leading to negative transfer and deteriorating model performance. Therefore, mitigating negative transfer is essential. This study revisits negative transfer through the lens of causally disentangled learning, emphasizing cross-domain discriminative disagreement on non-causal environmental features as a critical factor. Our theoretical analysis reveals that overreliance on non-causal environmental features as the environment evolves can cause discriminative disagreements (termed environmental disagreement), thereby resulting in negative transfer. To address this, we propose Reducing Environmental Disagreement (RED), which disentangles each sample into domain-invariant causal features and domain-specific non-causal environmental features via adversarially training domain-specific environmental feature extractors in the opposite domains. Subsequently, RED estimates and reduces environmental disagreement based on domain-specific non-causal environmental features. Experimental results confirm that RED effectively mitigates negative transfer and achieves state-of-the-art performance. },
+  number    = {7},
   issn      = {1939-3539},
-  pages     = {1-18},
+  pages     = {8485-8502},
   doi       = {10.1109/TPAMI.2026.3672777},
   pdf       = {https://doi.ieeecomputersociety.org/10.1109/TPAMI.2026.3672777},
   publisher = {IEEE Computer Society},

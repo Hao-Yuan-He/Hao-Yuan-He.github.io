@@ -1,6 +1,14 @@
 {
   "news": [
     {
+      "date": "2026-10-26",
+      "content": "The LongSpark preprint on efficient speculative decoding has been updated on arXiv."
+    },
+    {
+      "date": "2026-09-30",
+      "content": "Candidate Retention for Abductive Learning is available as an arXiv preprint."
+    },
+    {
       "date": "2026-02",
       "content": "Website redesigned"
     }
