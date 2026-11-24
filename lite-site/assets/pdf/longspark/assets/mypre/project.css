@@ -1,0 +1,178 @@
+/* Adapted from examples/ascend-kernel-survey: Work Sans, white slides, purple rules. */
+@font-face {
+  font-family: "Work Sans";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: block;
+  src: url("../fonts/assets/fonts/WorkSans-wght.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Work Sans";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: block;
+  src: url("../fonts/assets/fonts/WorkSans-Italic-wght.ttf") format("truetype");
+}
+html, body {
+  font-family: "Work Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+:root {
+  --mypre-size-title: calc(var(--mypre-unit) * 40);
+  --mypre-size-body: calc(var(--mypre-unit) * 28);
+  --mypre-size-takeaway: calc(var(--mypre-unit) * 32);
+  --mypre-ink: #25232a;
+  --mypre-strong: #633475;
+  --mypre-accent: #633475;
+  --mypre-muted: #706b75;
+  --mypre-bg: #f2f1f3;
+  --mypre-rule: #e8e2ec;
+  --mypre-slide-radius: 0;
+  --mypre-slide-shadow: none;
+  --mypre-slide-padding-top: calc(var(--mypre-unit) * 62);
+  --mypre-slide-padding-x: calc(var(--mypre-unit) * 88);
+  --mypre-slide-padding-bottom: calc(var(--mypre-unit) * 62);
+  --mypre-accent-width: 75%;
+  --mypre-accent-height: calc(var(--mypre-unit) * 3);
+  --mypre-accent-y: calc(var(--mypre-unit) * 125);
+  --mypre-gap-block: calc(var(--mypre-unit) * 24);
+  --mypre-gap-figure: calc(var(--mypre-unit) * 10);
+  --mypre-image-width: 100%;
+  /* Figures are rendered at 1400 px wide; most slides give them this height. */
+  --mypre-image-height: calc(var(--mypre-unit) * 505);
+  --mypre-gap-paragraph: calc(var(--mypre-unit) * 20);
+  --mypre-gap-list: calc(var(--mypre-unit) * 20);
+  --mypre-leading-body: 1.5;
+  --mypre-adaptive: 1;
+  --mypre-leading-min: 1.30;
+  --mypre-leading-max: 1.70;
+  --mypre-gap-scale-min: 0.55;
+  --mypre-gap-scale-max: 1.60;
+  --mypre-fill-target: 0.94;
+}
+
+.slide:not(:first-child) {
+  background-image:
+    linear-gradient(var(--mypre-accent), var(--mypre-accent)),
+    linear-gradient(var(--mypre-accent), var(--mypre-accent));
+  background-size:
+    var(--mypre-accent-width) var(--mypre-accent-height),
+    calc(100% - var(--mypre-slide-padding-x) * 2) var(--mypre-accent-height);
+  background-position:
+    left var(--mypre-slide-padding-x) top var(--mypre-accent-y),
+    left var(--mypre-slide-padding-x) bottom calc(var(--mypre-unit) * 48);
+}
+.slide:not(:first-child) h1 { margin-bottom: 0; padding-bottom: 0; }
+
+/* The first Markdown block carries the section label: the bold entry is shown. */
+.slide:not(:first-child) .slide__content > .block:first-child {
+  display: contents;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.slide:not(:first-child) .slide__content > .block:first-child p {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: calc(var(--mypre-unit) * 24);
+  left: var(--mypre-slide-padding-x);
+  right: var(--mypre-slide-padding-x);
+  bottom: calc(var(--mypre-unit) * 16);
+  height: calc(var(--mypre-unit) * 20.8);
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  font-size: calc(var(--mypre-unit) * 16);
+  line-height: 1.3;
+}
+.slide:not(:first-child) .slide__content > .block:first-child p > em { display: none; }
+.slide:not(:first-child) .slide__content > .block:first-child p > strong {
+  color: #633475;
+  font-weight: 600;
+  text-align: left;
+}
+.slide:not(:first-child) .slide__content > .block:first-child p::after {
+  content: "hehy@lamda.nju.edu.cn";
+  color: #706b75;
+  font-size: calc(var(--mypre-unit) * 14);
+  font-weight: 400;
+  white-space: nowrap;
+}
+.slide:not(:first-child) .slide__content > .block:nth-child(2):has(h1) {
+  height: calc(var(--mypre-unit) * 56);
+  margin-bottom: calc(var(--mypre-unit) * 28 * var(--mypre-gap-scale));
+}
+
+li { margin: calc(var(--mypre-unit) * 14 * var(--mypre-gap-scale)) 0; }
+p.statement { line-height: var(--mypre-leading); }
+.slide table {
+  font-size: calc(var(--mypre-unit) * 26);
+  line-height: var(--mypre-leading);
+}
+.slide th, .slide td {
+  border: 0;
+  border-bottom: 1px solid #eeebf0;
+  padding: calc(var(--mypre-unit) * 9 * var(--mypre-gap-scale)) calc(var(--mypre-unit) * 14);
+}
+.slide th { background: transparent; color: var(--mypre-accent); }
+.slide th:first-child, .slide td:first-child { padding-left: 0; white-space: nowrap; }
+.slide tbody tr:last-child td { border-bottom: 0; }
+
+.slide:first-child { background-image: none; }
+.slide:first-child .slide__content { padding-top: calc(var(--mypre-unit) * 145); }
+.slide:first-child h1 {
+  font-size: calc(var(--mypre-unit) * 58);
+  line-height: 1.22;
+}
+.slide:first-child p:not(:has(img)) {
+  font-size: calc(var(--mypre-unit) * 32);
+  color: var(--mypre-muted);
+  margin-top: calc(var(--mypre-unit) * 28);
+}
+.slide:first-child p:has(img) {
+  position: absolute;
+  left: var(--mypre-slide-padding-x);
+  right: var(--mypre-slide-padding-x);
+  bottom: calc(var(--mypre-unit) * 84);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: calc(var(--mypre-unit) * 76);
+  margin: 0;
+}
+.slide:first-child p:has(img) img {
+  height: calc(var(--mypre-unit) * 108);
+  width: auto;
+  object-fit: contain;
+}
+.controls, .legend { top: 14px; bottom: auto; }
+.controls__status { top: calc(100% + 8px); bottom: auto; }
+
+/* Figures are white PNG canvases that sit directly on the white slide. */
+figure.figure img { border-radius: 0; }
+
+/* Slides that pair a figure with a display formula give the figure less height. */
+.slide:has(img[src$="lossless.png"]),
+.slide:has(img[src$="summary-update.png"]),
+.slide:has(img[src$="markov-correction.png"]),
+.slide:has(img[src$="training.png"]),
+.slide:has(img[src$="attention-budget.png"]) {
+  --mypre-image-height: calc(var(--mypre-unit) * 400);
+}
+/* Short, wide figures. */
+.slide:has(img[src$="remaining-cost.png"]) {
+  --mypre-image-height: calc(var(--mypre-unit) * 240);
+}
+.slide:has(img[src$="latency-model.png"]) {
+  --mypre-image-height: calc(var(--mypre-unit) * 380);
+}
+
+/* Tall architecture figures with a single caption line get more height. */
+.slide:has(img[src$="drafter-arch.png"]),
+.slide:has(img[src$="multiscale-views.png"]) {
+  --mypre-image-height: calc(var(--mypre-unit) * 545);
+}
